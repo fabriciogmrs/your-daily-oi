@@ -1,123 +1,231 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
-import { ArrowRight, BookOpen, Check, CheckCheck, ChevronDown, Download, FileText, Heart, Infinity as InfinityIcon, Menu, Printer, ShieldCheck, Sparkles, X, Zap } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+import { ArrowRight, Check, ChevronDown, Download, FileText, Infinity as InfinityIcon, Printer, ShieldCheck, Sparkles, X, Zap } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '@/components/ui/button';
-import { categories, categoryGroups, faqs } from '@/lib/product-content';
-import bundleImage from '@/assets/activity-bundle-br.jpg';
+import { audiences, categories, faqs, offerItems, skills, toneStyles } from '@/lib/product-content';
+import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
+import { Cloud, Dot, Pencil, Squiggle, Star, useReveal } from '@/components/kids/Decor';
 
 export const Route = createFileRoute('/')({
   head: () => ({ meta: [
-    { title: 'Atividades Infantis — 442 páginas para imprimir | R$27' },
-    { name: 'description', content: '442 páginas de atividades infantis em PDF para crianças de 3 a 12 anos. 13 categorias, 3 níveis, acesso vitalício e garantia de 7 dias. R$27 no Pix.' },
-    { property: 'og:title', content: 'Atividades Infantis — Escolha, imprima e aplique.' },
-    { property: 'og:description', content: 'Um pacote brasileiro com 442 páginas, 13 categorias e três níveis. Para aprender na escola e em casa. R$27 no Pix.' },
+    { title: '442 páginas de atividades infantis para imprimir | R$27' },
+    { name: 'description', content: 'Pacote com 442 páginas de atividades infantis em PDF para crianças de 3 a 12 anos. 13 categorias, 3 níveis, acesso vitalício e garantia de 7 dias. R$27 no Pix.' },
+    { property: 'og:title', content: '442 páginas de atividades para aprender brincando' },
+    { property: 'og:description', content: 'Atividades prontas para imprimir e usar em casa ou na escola. 13 categorias, 3 níveis. R$27 no Pix.' },
     { property: 'og:type', content: 'website' },
     { name: 'twitter:card', content: 'summary_large_image' },
   ] }),
   component: Index,
 });
 
-const toneClasses = {
-  mint: 'bg-mint text-primary', sky: 'bg-sky text-foreground',
-  sunshine: 'bg-sunshine/25 text-foreground', coral: 'bg-coral/10 text-coral',
-};
+function CtaButton({ children, onClick, className = '' }: { children: ReactNode; onClick: () => void; className?: string }) {
+  return <Button onClick={onClick} className={`cta-button h-auto rounded-full px-8 py-5 font-heading text-lg font-extrabold tracking-wide sm:text-xl ${className}`}>{children} <ArrowRight className="size-6" /></Button>;
+}
+
+function SectionHead({ kicker, title, tone, children }: { kicker: string; title: ReactNode; tone: keyof typeof toneStyles; children?: ReactNode }) {
+  return <div className="reveal mx-auto max-w-2xl text-center">
+    <span className={`kicker ${toneStyles[tone].soft} ${toneStyles[tone].text}`}><Sparkles size={14} /> {kicker}</span>
+    <h2 className="section-title mt-4">{title}</h2>
+    {children && <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{children}</p>}
+  </div>;
+}
+
+const gallery: { kind: SheetKind; rot: number }[] = [
+  { kind: 'maze', rot: -4 }, { kind: 'letters', rot: 3 }, { kind: 'numbers', rot: -2 }, { kind: 'dots', rot: 4 },
+  { kind: 'match', rot: -3 }, { kind: 'color', rot: 2 }, { kind: 'trace', rot: -4 }, { kind: 'shapes', rot: 3 },
+];
 
 function Index() {
-  const [filter, setFilter] = useState<string>('Todas as categorias');
+  useReveal();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const scrollToOffer = () => document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' });
+  const buy = () => setCheckoutOpen(true);
 
   return <>
-    <div className="bg-primary px-4 py-2.5 text-center text-xs font-medium text-primary-foreground sm:text-sm">
-      Um mundo de descobertas, por <strong>R$27</strong> <span className="mx-2 opacity-40">|</span> Pagamento único. Aprendizado sem limites.
-    </div>
-    <header className="relative z-20 border-b border-border/60 bg-background">
-      <div className="page-width flex h-20 items-center justify-between gap-5">
-        <a href="#" className="flex items-center gap-2.5" aria-label="Atividades Infantis, início">
-          <span className="flex size-10 items-center justify-center rounded-lg bg-mint text-primary"><BookOpen size={24} strokeWidth={1.8} /></span>
-          <span className="font-heading text-lg font-extrabold leading-tight">atividades<span className="block text-primary">infantis<span className="text-coral">.</span></span></span>
+    <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
+      <div className="page-width flex h-18 items-center justify-between gap-4">
+        <a href="#" className="flex items-center gap-2" aria-label="Aprender Brincando, início">
+          <span className="blob flex size-11 items-center justify-center bg-sun font-heading text-xl font-extrabold">A</span>
+          <span className="font-heading text-xl font-extrabold leading-none">aprender<span className="text-bubble">brincando</span></span>
         </a>
-        <nav className="hidden items-center gap-8 text-sm font-medium md:flex" aria-label="Navegação principal">
-          <a className="transition-colors hover:text-primary" href="#categorias">O que vem no pacote</a>
-          <a className="transition-colors hover:text-primary" href="#como-funciona">Como funciona</a>
-          <a className="transition-colors hover:text-primary" href="#duvidas">Dúvidas</a>
+        <nav className="hidden items-center gap-7 text-sm font-bold md:flex" aria-label="Navegação principal">
+          <a className="hover:text-primary" href="#pacote">O pacote</a>
+          <a className="hover:text-primary" href="#exemplos">Exemplos</a>
+          <a className="hover:text-primary" href="#duvidas">Dúvidas</a>
         </nav>
-        <Button className="hidden h-10 px-5 font-bold sm:inline-flex" onClick={scrollToOffer}>Quero meu pacote <ArrowRight /></Button>
-        <Button variant="ghost" size="icon" className="md:hidden" aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
+        <Button onClick={() => document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' })} className="rounded-full px-5 font-extrabold">R$27</Button>
       </div>
-      {menuOpen && <nav className="absolute left-0 right-0 flex flex-col gap-5 border-b bg-background p-6 text-sm shadow-sm" aria-label="Navegação móvel">{[['O que vem no pacote', '#categorias'], ['Como funciona', '#como-funciona'], ['Dúvidas', '#duvidas']].map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav>}
     </header>
 
     <main>
-      <section className="hero">
-        <img className="hero-photo" src={bundleImage} alt="Representação ilustrativa de folhas de atividades com labirinto, letras, números e coordenação motora" width={1536} height={1024} fetchPriority="high" />
-        <div className="page-width">
-          <div className="hero-copy reveal">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/15 bg-mint/80 px-3 py-1.5 text-xs font-semibold text-primary"><Sparkles size={14} /> Pequenas atividades. Grandes descobertas.</div>
-            <h1 className="hero-title">Atividades infantis<br />para <span className="highlight">aprender</span><br /><span className="highlight">brincando.</span></h1>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-muted-foreground"><strong className="font-semibold text-foreground">Pare de montar atividade em cima da hora.</strong><br />442 páginas prontinhas para você escolher, imprimir e aplicar — na escola ou em casa.</p>
-            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium"><span className="flex items-center gap-1.5"><Check size={15} className="text-primary" /> De 3 a 12 anos</span><span className="flex items-center gap-1.5"><Check size={15} className="text-primary" /> 13 categorias</span><span className="flex items-center gap-1.5"><Check size={15} className="text-primary" /> 3 níveis</span></div>
-            <Button onClick={scrollToOffer} className="mt-7 h-13 w-full max-w-sm gap-4 text-base font-bold">Quero as atividades por R$27 <ArrowRight size={19} /></Button>
-            <div className="mt-3 flex items-center gap-2 text-xs text-muted-foreground"><ShieldCheck size={14} /> Compra única <span className="opacity-40">•</span> Acesso vitalício <span className="opacity-40">•</span> Garantia de 7 dias</div>
+      {/* HERO */}
+      <section className="dotgrid relative overflow-hidden pb-20 pt-12 sm:pt-16 lg:pb-28">
+        <Cloud className="float-slow absolute -left-6 top-10 w-32 text-sky-soft" />
+        <Star className="float absolute left-[46%] top-8 w-9 text-sun" />
+        <Squiggle className="absolute bottom-10 left-6 w-24 text-leaf" />
+        <Dot className="float absolute right-8 top-24 size-5 bg-bubble" />
+        <div className="page-width grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
+          <div className="reveal in relative z-10 text-center lg:text-left">
+            <span className="kicker bg-grape-soft text-grape"><Sparkles size={14} /> Pacote completo de atividades infantis</span>
+            <h1 className="mt-6 text-[44px] font-extrabold sm:text-6xl lg:text-[68px]">
+              <span className="text-tangerine">442 páginas</span> de atividades para <span className="relative isolate inline-block">aprender<Squiggle className="absolute -bottom-4 left-0 -z-10 h-4 w-full text-sun" /></span> brincando.
+            </h1>
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0">Tenha atividades prontas para imprimir e usar em casa ou na escola, organizadas para desenvolver diferentes habilidades das crianças.</p>
+            <div className="mx-auto mt-7 grid max-w-md grid-cols-3 gap-3 lg:mx-0">
+              {[['442', 'páginas', 'tangerine'], ['13', 'categorias', 'sky'], ['3', 'níveis', 'leaf']].map(([n, l, t]) =>
+                <div key={l} className={`wiggle rounded-2xl ${toneStyles[t as 'sky'].soft} px-3 py-3 text-center`}>
+                  <div className={`font-heading text-3xl font-extrabold leading-none sm:text-4xl ${toneStyles[t as 'sky'].text}`}>{n}</div>
+                  <div className="mt-1 text-xs font-black uppercase tracking-wider">{l}</div>
+                </div>)}
+            </div>
+            <CtaButton onClick={buy} className="mt-8 w-full sm:w-auto">Quero meu pacote por R$27</CtaButton>
+            <ul className="mx-auto mt-6 grid max-w-md grid-cols-2 gap-x-4 gap-y-2 text-sm font-bold lg:mx-0">
+              {['Download imediato', 'Arquivo PDF', 'Acesso vitalício', 'Pronto para imprimir'].map(t => <li key={t} className="flex items-center gap-2"><span className="flex size-5 items-center justify-center rounded-full bg-leaf text-primary-foreground"><Check size={13} strokeWidth={4} /></span>{t}</li>)}
+            </ul>
           </div>
-        </div>
-        <div className="hero-sticker"><span className="font-heading text-4xl font-black">442</span><span className="text-xs font-bold">páginas de</span><span className="text-xs font-bold">descobertas!</span></div>
-        <span className="absolute bottom-3 right-5 text-[10px] text-muted-foreground">Imagem ilustrativa do material</span>
-      </section>
 
-      <section className="border-y border-border/70 bg-muted py-6" aria-label="Vantagens do pacote">
-        <div className="page-width grid grid-cols-2 gap-6 md:grid-cols-4">{[
-          { icon: Download, title: 'Download imediato', text: 'Receba em PDF e comece hoje' },
-          { icon: Printer, title: 'Pronto para imprimir', text: 'Escolha só o que precisa' },
-          { icon: InfinityIcon, title: 'Seu para sempre', text: 'Sem mensalidade, sem prazo' },
-          { icon: Heart, title: 'Feito para o Brasil', text: 'Na escola e na sua casa' },
-        ].map(({ icon: Icon, title, text }) => <div key={title} className="flex items-center gap-3"><Icon className="shrink-0 text-primary" size={24} strokeWidth={1.6} /><div><h2 className="text-sm font-extrabold">{title}</h2><p className="mt-0.5 text-xs text-muted-foreground">{text}</p></div></div>)}</div>
-      </section>
-
-      <section id="categorias" className="py-18 sm:py-22">
-        <div className="page-width">
-          <div className="text-center"><p className="section-kicker">Um pacote. Muitas possibilidades.</p><h2 className="section-title mt-3">Uma atividade para cada descoberta.</h2><p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">13 categorias organizadas por habilidade. Menos tempo procurando,<br className="hidden sm:block" /> mais tempo acompanhando o aprendizado.</p></div>
-          <div className="mt-8 flex flex-wrap justify-center gap-2" role="group" aria-label="Filtrar categorias">{categoryGroups.map(group => <Button key={group} size="sm" variant={filter === group ? 'default' : 'ghost'} className="h-9 px-4 text-xs" aria-pressed={filter === group} onClick={() => setFilter(group)}>{group}</Button>)}</div>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">{categories.filter(category => filter === 'Todas as categorias' || category.group === filter).map(({ name, description, icon: Icon, tone }) => <article key={name} className="category-card rounded-lg border border-border/70 bg-card p-5"><div className="flex items-start justify-between"><span className={`flex size-11 items-center justify-center rounded-lg ${toneClasses[tone]}`}><Icon size={23} strokeWidth={1.7} /></span><span className="text-xs text-muted-foreground/60">{String(categories.findIndex(c => c.name === name) + 1).padStart(2, '0')}</span></div><h3 className="mt-4 text-base font-extrabold">{name}</h3><p className="mt-2 text-xs leading-relaxed text-muted-foreground">{description}</p></article>)}</div>
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-xs text-muted-foreground"><span className="flex items-center gap-2"><CheckCheck size={16} className="text-primary" /> Gabaritos nas atividades que precisam</span><span className="flex items-center gap-2"><FileText size={16} className="text-primary" /> 442 páginas em PDF</span></div>
-        </div>
-      </section>
-
-      <section id="como-funciona" className="bg-secondary py-16 sm:py-20">
-        <div className="page-width">
-          <div className="text-center"><p className="section-kicker">Sua rotina mais leve</p><h2 className="section-title mt-3">Escolha. Imprima. Aplique.</h2><p className="mt-4 text-sm text-muted-foreground">O planejamento fica mais simples. A descoberta fica com eles.</p></div>
-          <div className="mt-12 grid gap-9 sm:grid-cols-3">{[
-            { number: '01', icon: BookOpen, title: 'Escolha a atividade', text: 'Encontre a habilidade que quer trabalhar e o nível adequado para a criança.' },
-            { number: '02', icon: Printer, title: 'Imprima as páginas', text: 'Abra o PDF e imprima o que vai usar. O restante fica guardado para a próxima vez.' },
-            { number: '03', icon: Sparkles, title: 'Deixe a descoberta acontecer', text: 'Aplique na sala de aula ou em casa, respeitando o ritmo de cada criança.' },
-          ].map(({ number, icon: Icon, title, text }) => <div key={number} className="relative text-center"><span className="mx-auto flex size-14 items-center justify-center rounded-full bg-background text-primary"><Icon size={26} strokeWidth={1.6} /></span><p className="mt-5 text-xs font-bold text-primary">PASSO {number}</p><h3 className="mt-2 text-lg font-extrabold">{title}</h3><p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">{text}</p></div>)}</div>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-3 border-t border-primary/10 pt-7"><span className="mr-2 text-sm font-semibold">Para diferentes momentos:</span><span className="rounded-full bg-background px-4 py-2 text-xs font-medium">Fácil</span><span className="rounded-full bg-background px-4 py-2 text-xs font-medium">Médio</span><span className="rounded-full bg-background px-4 py-2 text-xs font-medium">Difícil</span></div>
-        </div>
-      </section>
-
-      <section id="oferta" className="py-18 sm:py-22">
-        <div className="page-width grid items-center gap-12 md:grid-cols-2 md:gap-20">
-          <div><p className="section-kicker">Mais de 440 motivos para começar</p><h2 className="section-title mt-3">Menos correria.<br />Mais tempo para ensinar.</h2><p className="mt-5 text-sm leading-relaxed text-muted-foreground">Um material brasileiro para quem cuida do aprendizado todos os dias. Da primeira letra aos desafios de lógica, tenha uma atividade à mão.</p><ul className="mt-7 space-y-4">{['442 páginas para imprimir e aplicar', '13 categorias organizadas por habilidade', 'Níveis fácil, médio e difícil', 'Gabaritos nas atividades que precisam', 'Download imediato e acesso vitalício'].map(text => <li key={text} className="flex items-center gap-3 text-sm"><span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-mint text-primary"><Check size={12} strokeWidth={3} /></span>{text}</li>)}</ul><div className="mt-8 flex items-center gap-3 border-t pt-6"><ShieldCheck size={33} className="shrink-0 text-primary" strokeWidth={1.6} /><div><p className="font-heading text-base font-extrabold">7 dias para decidir com tranquilidade.</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">Se não for o que esperava, solicite seu dinheiro de volta.</p></div></div></div>
-          <div className="rounded-lg border-2 border-primary bg-background p-7 text-center sm:p-10">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-mint px-3 py-1.5 text-xs font-semibold text-primary"><Zap size={13} /> Pacote completo • Acesso vitalício</span>
-            <h3 className="mt-5 text-2xl font-extrabold">Atividades Infantis</h3><p className="mt-2 text-sm text-muted-foreground">Tudo pronto para a próxima descoberta.</p>
-            <p className="mt-7 text-sm text-muted-foreground">Pagamento único de</p><p className="offer-price mt-2"><span className="mr-1 align-top text-2xl leading-loose">R$</span>27<span className="text-3xl">,00</span></p><p className="mt-3 text-xs font-medium text-muted-foreground">À vista no Pix. Sem assinatura. Sem mensalidade.</p>
-            <Button onClick={() => setCheckoutOpen(true)} className="mt-8 h-13 w-full gap-3 whitespace-normal text-base font-bold">Quero meu pacote completo <ArrowRight /></Button>
-            <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-muted-foreground"><ShieldCheck size={14} /> Garantia de 7 dias</p>
-            <div className="mt-6 border-t pt-5 text-xs text-muted-foreground">PDF digital <span className="mx-2">•</span> Sem envio físico <span className="mx-2">•</span> De 3 a 12 anos</div>
+          {/* Mockup */}
+          <div className="relative mx-auto h-[400px] w-full max-w-[460px] sm:h-[480px]">
+            <div className="blob absolute inset-4 bg-sun-soft" />
+            <div className="blob absolute bottom-0 right-0 size-40 bg-bubble-soft" />
+            <ActivitySheet kind="color" className="absolute left-[4%] top-[12%] h-[62%] w-[52%]" style={{ transform: 'rotate(-10deg)' }} />
+            <ActivitySheet kind="maze" className="absolute right-[2%] top-[4%] h-[62%] w-[52%]" style={{ transform: 'rotate(8deg)' }} />
+            <ActivitySheet kind="letters" className="absolute bottom-[3%] left-[22%] h-[62%] w-[54%]" style={{ transform: 'rotate(-2deg)' }} />
+            <div className="float absolute -left-1 bottom-10 z-10 flex size-24 rotate-[-8deg] flex-col items-center justify-center rounded-full border-4 border-card bg-tangerine text-primary-foreground shadow-lg">
+              <span className="font-heading text-3xl font-extrabold leading-none">PDF</span><span className="text-[10px] font-black uppercase">pra imprimir</span>
+            </div>
+            <Pencil className="float-slow absolute -right-2 bottom-16 z-10 w-16" />
+            <Star className="float absolute right-10 top-0 z-10 w-10 text-bubble" />
           </div>
         </div>
       </section>
 
-      <section id="duvidas" className="border-t bg-muted py-16 sm:py-20"><div className="page-width max-w-3xl"><div className="text-center"><p className="section-kicker">Tudo às claras</p><h2 className="section-title mt-3">Ficou alguma dúvida?</h2></div><div className="mt-9">{faqs.map(({ question, answer }, index) => <div key={question} className="border-b"><Button variant="ghost" className="h-auto w-full justify-between gap-4 whitespace-normal rounded-none px-0 py-5 text-left text-sm font-semibold hover:bg-transparent hover:text-primary" aria-expanded={openFaq === index} aria-controls={`faq-${index}`} onClick={() => setOpenFaq(openFaq === index ? null : index)}>{question}<ChevronDown className={`shrink-0 transition-transform ${openFaq === index ? 'rotate-180' : ''}`} /></Button>{openFaq === index && <p id={`faq-${index}`} className="pb-5 pr-5 text-sm leading-relaxed text-muted-foreground">{answer}</p>}</div>)}</div></div></section>
+      {/* O QUE VOCÊ RECEBE */}
+      <section id="pacote" className="relative bg-sky-soft py-20 sm:py-28">
+        <Star className="float absolute right-[8%] top-12 w-8 text-sun" />
+        <div className="page-width">
+          <SectionHead kicker="O que você recebe" title={<>Um pacote completo para deixar as atividades <span className="text-sky">muito mais divertidas.</span></>} tone="sky">13 categorias organizadas por habilidade, em níveis fácil, médio e difícil.</SectionHead>
+          <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
+            {categories.map(({ name, description, icon: Icon, tone }, i) => <article key={name} className="reveal soft-card group p-5 sm:p-6" style={{ transitionDelay: `${(i % 4) * 70}ms` }}>
+              <span className={`blob wiggle flex size-14 items-center justify-center ${toneStyles[tone].solid} text-primary-foreground`}><Icon size={28} strokeWidth={2.2} /></span>
+              <h3 className="mt-4 text-xl font-extrabold">{name}</h3>
+              <p className="mt-1 text-sm leading-snug text-muted-foreground">{description}</p>
+            </article>)}
+            <article className="reveal flex flex-col justify-center rounded-[28px] bg-tangerine p-6 text-primary-foreground">
+              <span className="font-heading text-5xl font-extrabold leading-none">442</span>
+              <span className="mt-1 font-bold">páginas com gabaritos nas atividades que precisam</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* EXEMPLOS */}
+      <section id="exemplos" className="relative overflow-hidden py-20 sm:py-28">
+        <Cloud className="float-slow absolute right-[-30px] top-16 w-40 text-bubble-soft" />
+        <div className="page-width">
+          <SectionHead kicker="Espie por dentro" title={<>Exemplos das <span className="text-bubble">atividades</span></>} tone="bubble">Páginas coloridas, claras e prontas para a criança pegar o lápis e começar.</SectionHead>
+          <div className="mt-14 grid grid-cols-2 gap-5 sm:gap-8 md:grid-cols-4">
+            {gallery.map(({ kind, rot }, i) => <div key={kind} className="reveal" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
+              <ActivitySheet kind={kind} className="sheet-tilt aspect-[3/4] w-full" style={{ transform: `rotate(${rot}deg)` }} />
+            </div>)}
+          </div>
+          <p className="mt-8 text-center text-xs text-muted-foreground">Ilustrações representativas do estilo das atividades.</p>
+        </div>
+      </section>
+
+      {/* DESENVOLVIMENTO */}
+      <section className="relative bg-leaf-soft py-20 sm:py-28">
+        <Squiggle className="absolute left-[6%] top-14 w-20 text-grape" />
+        <div className="page-width">
+          <SectionHead kicker="Desenvolvimento" title={<>Muito mais do que <span className="text-leaf">uma brincadeira.</span></>} tone="leaf">Cada página estimula uma habilidade importante para crescer aprendendo.</SectionHead>
+          <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+            {skills.map(({ emoji, name, tone }, i) => <div key={name} className="reveal soft-card flex flex-col items-center p-6 text-center" style={{ transitionDelay: `${(i % 4) * 70}ms` }}>
+              <span className={`blob wiggle flex size-20 items-center justify-center text-4xl ${toneStyles[tone].soft}`}>{emoji}</span>
+              <h3 className="mt-4 text-lg font-extrabold leading-tight">{name}</h3>
+            </div>)}
+          </div>
+        </div>
+      </section>
+
+      {/* PARA QUEM É */}
+      <section className="py-20 sm:py-28">
+        <div className="page-width">
+          <SectionHead kicker="Para quem é" title={<>Feito para quem <span className="text-grape">ensina com carinho.</span></>} tone="grape" />
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {audiences.map(({ emoji, title, text, tone }, i) => <article key={title} className={`reveal soft-card relative overflow-hidden p-8 ${toneStyles[tone].soft}`} style={{ transitionDelay: `${i * 90}ms` }}>
+              <div className={`blob absolute -right-8 -top-8 size-32 ${toneStyles[tone].solid} opacity-25`} />
+              <span className="relative flex size-20 items-center justify-center rounded-3xl bg-card text-5xl shadow-sm">{emoji}</span>
+              <h3 className="relative mt-6 text-3xl font-extrabold">{title}</h3>
+              <p className="relative mt-3 text-lg leading-relaxed text-muted-foreground">{text}</p>
+            </article>)}
+          </div>
+        </div>
+      </section>
+
+      {/* OFERTA */}
+      <section id="oferta" className="relative overflow-hidden bg-grape py-20 sm:py-28">
+        <Star className="float absolute left-[8%] top-12 w-12 text-sun" />
+        <Star className="float-slow absolute bottom-16 right-[10%] w-9 text-bubble" />
+        <Cloud className="absolute -left-10 bottom-8 w-44 text-grape-soft opacity-20" />
+        <div className="page-width">
+          <div className="reveal relative mx-auto max-w-3xl rounded-[40px] bg-card p-7 shadow-2xl sm:p-12">
+            <span className="absolute -top-5 left-1/2 -translate-x-1/2 rotate-[-3deg] whitespace-nowrap rounded-full bg-sun px-6 py-2 font-heading text-lg font-extrabold shadow-md">Oferta especial ✨</span>
+            <h2 className="section-title text-center">Leve o pacote completo hoje</h2>
+            <div className="mt-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+              <ul className="grid gap-3">
+                {offerItems.map((item, i) => { const icons = [FileText, Sparkles, Zap, Printer, Download, InfinityIcon]; const Icon = icons[i]!; const tones = ['tangerine', 'sky', 'leaf', 'bubble', 'grape', 'sun'] as const;
+                  return <li key={item} className="flex items-center gap-3 text-lg font-bold"><span className={`flex size-9 shrink-0 items-center justify-center rounded-xl ${toneStyles[tones[i]!].soft} ${toneStyles[tones[i]!].text}`}><Icon size={19} strokeWidth={2.4} /></span>{item}</li>; })}
+              </ul>
+              <div className="rounded-[32px] bg-sun-soft px-8 py-8 text-center">
+                <p className="text-sm font-black uppercase tracking-wider text-muted-foreground">Tudo isso por</p>
+                <p className="font-heading text-8xl font-extrabold leading-none text-tangerine"><span className="align-top text-3xl">R$</span>27</p>
+                <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-leaf px-4 py-1 text-sm font-extrabold text-primary-foreground">Pagamento via Pix</p>
+                <p className="mt-2 text-xs font-bold text-muted-foreground">Pagamento único, sem mensalidade</p>
+              </div>
+            </div>
+            <CtaButton onClick={buy} className="mt-10 w-full">Quero garantir meu pacote</CtaButton>
+            <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl bg-leaf-soft p-4">
+              <ShieldCheck className="size-10 shrink-0 text-leaf" />
+              <p className="text-sm"><strong className="font-heading text-lg">🛡️ Garantia de 7 dias.</strong> Se não for o que esperava, você pede o reembolso.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="duvidas" className="py-20 sm:py-28">
+        <div className="page-width max-w-3xl">
+          <SectionHead kicker="Perguntas frequentes" title={<>Ficou alguma <span className="text-tangerine">dúvida?</span></>} tone="tangerine" />
+          <div className="mt-12 grid gap-3">
+            {faqs.map(({ question, answer }, i) => { const open = openFaq === i; return <div key={question} className={`overflow-hidden rounded-3xl border-2 transition-colors ${open ? 'border-tangerine bg-tangerine-soft' : 'border-border bg-card'}`}>
+              <button className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left font-heading text-lg font-bold" aria-expanded={open} onClick={() => setOpenFaq(open ? null : i)}>
+                {question}<span className={`flex size-8 shrink-0 items-center justify-center rounded-full bg-card transition-transform ${open ? 'rotate-180' : ''}`}><ChevronDown size={18} /></span>
+              </button>
+              {open && <p className="px-6 pb-6 leading-relaxed text-muted-foreground">{answer}</p>}
+            </div>; })}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA FINAL */}
+      <section className="px-4 pb-20">
+        <div className="reveal relative mx-auto max-w-5xl overflow-hidden rounded-[44px] bg-tangerine px-6 py-16 text-center text-primary-foreground sm:px-14 sm:py-20">
+          <div className="blob absolute -left-12 -top-12 size-48 bg-sun opacity-50" />
+          <div className="blob absolute -bottom-16 -right-10 size-56 bg-bubble opacity-40" />
+          <Star className="float absolute right-[12%] top-10 w-10 text-sun" />
+          <Squiggle className="absolute bottom-10 left-[10%] w-20 text-sun" />
+          <h2 className="relative mx-auto max-w-3xl text-3xl font-extrabold sm:text-5xl">Transforme alguns minutos de atividade em momentos de aprendizado e diversão.</h2>
+          <p className="relative mx-auto mt-5 max-w-xl text-lg font-semibold opacity-95">Tenha centenas de atividades prontas para usar quando precisar.</p>
+          <Button onClick={buy} className="relative mt-9 h-auto rounded-full bg-card px-9 py-5 font-heading text-lg font-extrabold text-foreground shadow-xl transition-transform hover:-translate-y-1 hover:bg-card sm:text-xl">Quero meu pacote por R$27 <ArrowRight className="size-6" /></Button>
+        </div>
+      </section>
     </main>
-    <footer className="border-t py-8"><div className="page-width flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left"><div><p className="font-heading text-base font-extrabold">atividades infantis<span className="text-coral">.</span></p><p className="mt-1 text-xs text-muted-foreground">Pequenas atividades. Grandes descobertas.</p></div><p className="max-w-sm text-xs leading-relaxed text-muted-foreground">Material digital para fins educativos. As atividades não substituem acompanhamento profissional.</p></div></footer>
+
+    <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">Material digital em PDF · Crianças de 3 a 12 anos · Pagamento via Pix</footer>
 
     <Dialog.Root open={checkoutOpen} onOpenChange={setCheckoutOpen}>
-      <Dialog.Portal><Dialog.Overlay className="fixed inset-0 z-40 bg-foreground/35" /><Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[calc(100%_-_40px)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background p-8 shadow-xl"><Dialog.Title className="font-heading text-2xl font-extrabold">As compras ainda não estão abertas</Dialog.Title><Dialog.Description className="mt-4 text-sm leading-relaxed text-muted-foreground">O pagamento e o download deste pacote ainda não estão disponíveis nesta página. Nenhuma cobrança será feita.</Dialog.Description><p className="mt-5 text-sm font-semibold">Pacote completo: R$27 no Pix</p><Dialog.Close asChild><Button className="mt-6 w-full">Entendi</Button></Dialog.Close><Dialog.Close asChild><Button variant="ghost" size="icon" aria-label="Fechar" className="absolute right-2 top-2"><X /></Button></Dialog.Close></Dialog.Content></Dialog.Portal>
+      <Dialog.Portal><Dialog.Overlay className="fixed inset-0 z-40 bg-foreground/40" /><Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[calc(100%_-_40px)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[32px] bg-background p-8 shadow-xl"><Dialog.Title className="font-heading text-2xl font-extrabold">As compras ainda não estão abertas</Dialog.Title><Dialog.Description className="mt-4 leading-relaxed text-muted-foreground">O pagamento e o download deste pacote ainda não estão disponíveis nesta página. Nenhuma cobrança será feita.</Dialog.Description><p className="mt-5 font-bold">Pacote completo: R$27 no Pix</p><Dialog.Close asChild><Button className="mt-6 w-full rounded-full">Entendi</Button></Dialog.Close><Dialog.Close asChild><Button variant="ghost" size="icon" aria-label="Fechar" className="absolute right-3 top-3 rounded-full"><X /></Button></Dialog.Close></Dialog.Content></Dialog.Portal>
     </Dialog.Root>
   </>;
 }
