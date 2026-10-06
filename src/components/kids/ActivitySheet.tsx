@@ -30,7 +30,7 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
       {[[3, C.orange], [5, C.sky], [2, C.leaf]].map(([n, col], r) => <g key={r}>
         {Array.from({ length: n as number }).map((_, i) => <circle key={i} cx={22 + i * 24} cy={30 + r * 48} r="9" fill={col as string} />)}
         <rect x="150" y={14 + r * 48} width="38" height="34" rx="8" fill="none" stroke={C.ink} strokeWidth="3" strokeDasharray="5 5" /></g>)}</g>;
-    case 'dots': { const pts = [[100, 15], [125, 50], [165, 55], [135, 85], [145, 125], [100, 105], [55, 125], [65, 85], [35, 55], [75, 50]];
+    case 'dots': { const pts: [number, number][] = [[100, 15], [125, 50], [165, 55], [135, 85], [145, 125], [100, 105], [55, 125], [65, 85], [35, 55], [75, 50]];
       return <g><path d={'M' + pts.map(p => p.join(' ')).join('L') + 'Z'} {...s} stroke={C.grape} strokeDasharray="3 7" />
         {pts.map(([x, y], i) => <g key={i}><circle cx={x} cy={y} r="4" fill={C.ink} /><text x={x + 7} y={y - 5} fontSize="11" fontWeight="800" fill={C.ink}>{i + 1}</text></g>)}</g>; }
     case 'match': return <g fontSize="30">
