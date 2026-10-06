@@ -69,7 +69,7 @@ function Index() {
           <div className="reveal in relative z-10 text-center lg:text-left">
             <span className="kicker bg-grape-soft text-grape"><Sparkles size={14} /> Pacote completo de atividades infantis</span>
             <h1 className="mt-6 text-[44px] font-extrabold sm:text-6xl lg:text-[68px]">
-              <span className="text-tangerine">442 páginas</span> de atividades para <span className="relative inline-block">aprender<Squiggle className="absolute -bottom-3 left-0 w-full text-sun" /></span> brincando.
+              <span className="text-tangerine">442 páginas</span> de atividades para <span className="relative isolate inline-block">aprender<Squiggle className="absolute -bottom-4 left-0 -z-10 h-4 w-full text-sun" /></span> brincando.
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0">Tenha atividades prontas para imprimir e usar em casa ou na escola, organizadas para desenvolver diferentes habilidades das crianças.</p>
             <div className="mx-auto mt-7 grid max-w-md grid-cols-3 gap-3 lg:mx-0">
