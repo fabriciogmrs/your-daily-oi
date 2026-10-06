@@ -174,7 +174,7 @@ function Index() {
             <h2 className="section-title text-center">Leve o pacote completo hoje</h2>
             <div className="mt-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
               <ul className="grid gap-3">
-                {offerItems.map((item, i) => { const icons = [FileText, Sparkles, Zap, Printer, Download, InfinityIcon]; const Icon = icons[i]; const tones = ['tangerine', 'sky', 'leaf', 'bubble', 'grape', 'sun'] as const;
+                {offerItems.map((item, i) => { const icons = [FileText, Sparkles, Zap, Printer, Download, InfinityIcon]; const Icon = icons[i]!; const tones = ['tangerine', 'sky', 'leaf', 'bubble', 'grape', 'sun'] as const;
                   return <li key={item} className="flex items-center gap-3 text-lg font-bold"><span className={`flex size-9 shrink-0 items-center justify-center rounded-xl ${toneStyles[tones[i]].soft} ${toneStyles[tones[i]].text}`}><Icon size={19} strokeWidth={2.4} /></span>{item}</li>; })}
               </ul>
               <div className="rounded-[32px] bg-sun-soft px-8 py-8 text-center">
