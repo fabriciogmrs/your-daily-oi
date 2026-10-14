@@ -3,7 +3,7 @@ import { useState, type ReactNode } from 'react';
 import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, X } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '@/components/ui/button';
-import { audiences, bonuses, categories, faqs, offerItems, skills, toneStyles } from '@/lib/product-content';
+import { audiences, bonuses, categories, faqs, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
 import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
 import { Cloud, Dot, Pencil, Squiggle, Star, useReveal } from '@/components/kids/Decor';
 
@@ -213,6 +213,22 @@ function Index() {
               <h2 className="section-title">Você não corre risco nenhum</h2>
               <p className="mt-3 text-lg leading-relaxed text-muted-foreground">Baixe, imprima e aplique. Se em 7 dias achar que o material não serve para você, devolvemos o valor integral, sem pergunta nenhuma.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROVA SOCIAL */}
+      <section className="relative overflow-hidden bg-bubble-soft py-20 sm:py-28">
+        <Star className="float absolute right-[6%] top-12 w-9 text-sun" />
+        <Squiggle className="absolute bottom-10 right-[14%] w-20 text-leaf" />
+        <div className="page-width">
+          <SectionHead kicker="Prova social" title={<>Quem já usa <span className="text-bubble">conta como é.</span></>} tone="bubble">Histórias de mães, professoras e profissionais que já aplicaram as atividades.</SectionHead>
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {testimonials.map(({ quote, role, emoji, tone }, i) => <figure key={role} className="reveal soft-card relative flex flex-col p-7" style={{ transitionDelay: `${i * 90}ms` }}>
+              <span className={`blob wiggle flex size-16 items-center justify-center text-4xl ${toneStyles[tone].soft}`}>{emoji}</span>
+              <blockquote className="mt-5 flex-1 text-lg leading-relaxed">“{quote}”</blockquote>
+              <figcaption className={`mt-6 border-t-2 border-border/60 pt-4 font-heading text-sm font-black uppercase tracking-wide ${toneStyles[tone].text}`}>{role}</figcaption>
+            </figure>)}
           </div>
         </div>
       </section>
