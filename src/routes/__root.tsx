@@ -78,9 +78,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Atividades Infantis | Aprender brincando" },
+      { title: "Brincatividades" },
       { name: "description", content: "Atividades infantis para imprimir e aplicar na escola ou em casa." },
-      { property: "og:title", content: "Atividades Infantis | Aprender brincando" },
+      { property: "og:title", content: "Brincatividades" },
       { property: "og:description", content: "Um pacote de descobertas para crianças de 3 a 12 anos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
