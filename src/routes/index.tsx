@@ -6,6 +6,12 @@ import { Button } from '@/components/ui/button';
 import { audiences, bonuses, categories, faqs, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
 import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
 import { Cloud, Dot, Pencil, Squiggle, Star, useReveal } from '@/components/kids/Decor';
+import heroMockup from '@/assets/hero-mockup.png';
+import bonusMat from '@/assets/bonus-matematica.png';
+import bonusRec from '@/assets/bonus-recortar.png';
+import bonusCaca from '@/assets/bonus-cacapalavras.png';
+
+const bonusImages = [bonusMat, bonusRec, bonusCaca];
 
 export const Route = createFileRoute('/')({
   head: () => ({ meta: [
@@ -46,9 +52,9 @@ function Index() {
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="bg-tangerine px-4 py-2 text-center text-sm font-extrabold text-primary-foreground">⏳ Preço de lançamento até 31 de outubro — depois volta para R$47</div>
       <div className="page-width flex h-18 items-center justify-between gap-4">
-        <a href="#" className="flex items-center gap-2" aria-label="Aprender Brincando, início">
+        <a href="#" className="flex items-center gap-2" aria-label="Brincatividades, início">
           <span className="blob flex size-11 items-center justify-center bg-sun font-heading text-xl font-extrabold">A</span>
-          <span className="font-heading text-xl font-extrabold leading-none">aprender<span className="text-bubble">brincando</span></span>
+          <span className="font-heading text-xl font-extrabold leading-none">brinc<span className="text-bubble">atividades</span></span>
         </a>
         <nav className="hidden items-center gap-7 text-sm font-bold md:flex" aria-label="Navegação principal">
           <a className="hover:text-primary" href="#pacote">O pacote</a>
@@ -90,9 +96,7 @@ function Index() {
           <div className="relative mx-auto h-[400px] w-full max-w-[460px] sm:h-[480px]">
             <div className="blob absolute inset-4 bg-sun-soft" />
             <div className="blob absolute bottom-0 right-0 size-40 bg-bubble-soft" />
-            <ActivitySheet kind="color" className="absolute left-[4%] top-[12%] h-[62%] w-[52%]" style={{ transform: 'rotate(-10deg)' }} />
-            <ActivitySheet kind="maze" className="absolute right-[2%] top-[4%] h-[62%] w-[52%]" style={{ transform: 'rotate(8deg)' }} />
-            <ActivitySheet kind="letters" className="absolute bottom-[3%] left-[22%] h-[62%] w-[54%]" style={{ transform: 'rotate(-2deg)' }} />
+            <img src={heroMockup} alt="Mockup do Brincatividades: apostila e folhas de atividades com lápis de cor" width={1024} height={1024} className="absolute inset-0 z-[5] m-auto h-full w-full object-contain drop-shadow-xl" />
             <div className="float absolute -left-1 bottom-10 z-10 flex size-24 rotate-[-8deg] flex-col items-center justify-center rounded-full border-4 border-card bg-tangerine text-primary-foreground shadow-lg">
               <span className="font-heading text-3xl font-extrabold leading-none">PDF</span><span className="text-[10px] font-black uppercase">pra imprimir</span>
             </div>
@@ -170,6 +174,7 @@ function Index() {
           <SectionHead kicker="Bônus de lançamento" title={<>🎁 Comprando hoje, você leva <span className="text-tangerine">3 bônus</span></>} tone="tangerine">Os três entram grátis e saem do pacote depois do lançamento.</SectionHead>
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {bonuses.map(({ title, text, value, tone }, i) => <article key={title} className="reveal soft-card relative p-7" style={{ transitionDelay: `${i * 90}ms` }}>
+              <div className={`-mx-2 -mt-2 mb-5 rounded-3xl ${toneStyles[tone].soft} p-3`}><img src={bonusImages[i]} alt={`Mockup do bônus ${title}`} loading="lazy" width={1024} height={1024} className="mx-auto aspect-square w-full max-w-[280px] object-contain transition-transform duration-500 hover:scale-105" /></div>
               <span className={`kicker ${toneStyles[tone].soft} ${toneStyles[tone].text}`}>Bônus {i + 1}</span>
               <h3 className="mt-4 text-2xl font-extrabold">{title}</h3>
               <p className="mt-2 leading-relaxed text-muted-foreground">{text}</p>
