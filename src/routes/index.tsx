@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState, type ReactNode } from 'react';
-import { ArrowRight, Check, ChevronDown, Download, FileText, Infinity as InfinityIcon, Printer, ShieldCheck, Sparkles, X, Zap } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, X } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '@/components/ui/button';
-import { audiences, categories, faqs, offerItems, skills, toneStyles } from '@/lib/product-content';
+import { audiences, bonuses, categories, faqs, offerItems, skills, toneStyles } from '@/lib/product-content';
 import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
 import { Cloud, Dot, Pencil, Squiggle, Star, useReveal } from '@/components/kids/Decor';
 
@@ -44,6 +44,7 @@ function Index() {
 
   return <>
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
+      <div className="bg-tangerine px-4 py-2 text-center text-sm font-extrabold text-primary-foreground">⏳ Preço de lançamento até 31 de outubro — depois volta para R$47</div>
       <div className="page-width flex h-18 items-center justify-between gap-4">
         <a href="#" className="flex items-center gap-2" aria-label="Aprender Brincando, início">
           <span className="blob flex size-11 items-center justify-center bg-sun font-heading text-xl font-extrabold">A</span>
@@ -163,31 +164,54 @@ function Index() {
         </div>
       </section>
 
+      {/* BÔNUS */}
+      <section className="relative bg-sun-soft py-20 sm:py-28">
+        <div className="page-width">
+          <SectionHead kicker="Bônus de lançamento" title={<>🎁 Comprando hoje, você leva <span className="text-tangerine">3 bônus</span></>} tone="tangerine">Os três entram grátis e saem do pacote depois do lançamento.</SectionHead>
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {bonuses.map(({ title, text, value, tone }, i) => <article key={title} className="reveal soft-card relative p-7" style={{ transitionDelay: `${i * 90}ms` }}>
+              <span className={`kicker ${toneStyles[tone].soft} ${toneStyles[tone].text}`}>Bônus {i + 1}</span>
+              <h3 className="mt-4 text-2xl font-extrabold">{title}</h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">{text}</p>
+              <p className="mt-4 font-bold">Valor: <span className="text-muted-foreground line-through">{value}</span> <span className="text-leaf">grátis hoje</span></p>
+            </article>)}
+          </div>
+        </div>
+      </section>
+
       {/* OFERTA */}
       <section id="oferta" className="relative overflow-hidden bg-grape py-20 sm:py-28">
         <Star className="float absolute left-[8%] top-12 w-12 text-sun" />
         <Star className="float-slow absolute bottom-16 right-[10%] w-9 text-bubble" />
-        <Cloud className="absolute -left-10 bottom-8 w-44 text-grape-soft opacity-20" />
         <div className="page-width">
           <div className="reveal relative mx-auto max-w-3xl rounded-[40px] bg-card p-7 shadow-2xl sm:p-12">
-            <span className="absolute -top-5 left-1/2 -translate-x-1/2 rotate-[-3deg] whitespace-nowrap rounded-full bg-sun px-6 py-2 font-heading text-lg font-extrabold shadow-md">Oferta especial ✨</span>
-            <h2 className="section-title text-center">Leve o pacote completo hoje</h2>
-            <div className="mt-8 grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
-              <ul className="grid gap-3">
-                {offerItems.map((item, i) => { const icons = [FileText, Sparkles, Zap, Printer, Download, InfinityIcon]; const Icon = icons[i]!; const tones = ['tangerine', 'sky', 'leaf', 'bubble', 'grape', 'sun'] as const;
-                  return <li key={item} className="flex items-center gap-3 text-lg font-bold"><span className={`flex size-9 shrink-0 items-center justify-center rounded-xl ${toneStyles[tones[i]!].soft} ${toneStyles[tones[i]!].text}`}><Icon size={19} strokeWidth={2.4} /></span>{item}</li>; })}
-              </ul>
-              <div className="rounded-[32px] bg-sun-soft px-8 py-8 text-center">
-                <p className="text-sm font-black uppercase tracking-wider text-muted-foreground">Tudo isso por</p>
-                <p className="font-heading text-8xl font-extrabold leading-none text-tangerine"><span className="align-top text-3xl">R$</span>27</p>
-                <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-leaf px-4 py-1 text-sm font-extrabold text-primary-foreground">Pagamento via Pix</p>
-                <p className="mt-2 text-xs font-bold text-muted-foreground">Pagamento único, sem mensalidade</p>
-              </div>
+            <span className="absolute -top-5 left-1/2 -translate-x-1/2 rotate-[-3deg] whitespace-nowrap rounded-full bg-sun px-6 py-2 font-heading text-lg font-extrabold shadow-md">Preço de lançamento ✨</span>
+            <h2 className="section-title text-center">O que você recebe</h2>
+            <ul className="mt-8 grid gap-3">
+              {offerItems.map(item => <li key={item} className="flex items-start gap-3 text-lg font-bold"><span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-leaf text-primary-foreground"><Check size={16} strokeWidth={4} /></span>{item}</li>)}
+              {bonuses.map((b, i) => <li key={b.title} className="flex items-start gap-3 text-lg font-bold text-tangerine"><span className="flex size-7 shrink-0 items-center justify-center">🎁</span>Bônus {i + 1} — {b.title}</li>)}
+            </ul>
+            <div className="mt-8 rounded-[32px] bg-sun-soft px-8 py-8 text-center">
+              <p className="text-sm font-bold text-muted-foreground">Se comprados separadamente: <span className="line-through">R$180</span></p>
+              <p className="mt-1 font-bold text-muted-foreground">Preço normal: <span className="line-through">R$47</span></p>
+              <p className="mt-3 text-sm font-black uppercase tracking-wider">Hoje, no lançamento</p>
+              <p className="font-heading text-8xl font-extrabold leading-none text-tangerine"><span className="align-top text-3xl">R$</span>27</p>
+              <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-leaf px-4 py-1 text-sm font-extrabold text-primary-foreground">📲 No Pix, com acesso imediato</p>
             </div>
-            <CtaButton onClick={buy} className="mt-10 w-full">Quero garantir meu pacote</CtaButton>
-            <div className="mt-6 flex items-center justify-center gap-3 rounded-2xl bg-leaf-soft p-4">
-              <ShieldCheck className="size-10 shrink-0 text-leaf" />
-              <p className="text-sm"><strong className="font-heading text-lg">🛡️ Garantia de 7 dias.</strong> Se não for o que esperava, você pede o reembolso.</p>
+            <CtaButton onClick={buy} className="mt-8 w-full">QUERO MEU BAÚ DE ATIVIDADES</CtaButton>
+            <p className="mt-4 text-center text-sm font-bold text-muted-foreground">🔒 Compra 100% segura · ⚡ Acesso na hora · 🛡️ 7 dias de garantia</p>
+          </div>
+        </div>
+      </section>
+
+      {/* GARANTIA */}
+      <section className="py-20 sm:py-24">
+        <div className="page-width">
+          <div className="reveal mx-auto flex max-w-3xl flex-col items-center gap-6 rounded-[40px] bg-leaf-soft p-8 text-center sm:flex-row sm:text-left sm:p-12">
+            <ShieldCheck className="size-24 shrink-0 text-leaf" />
+            <div>
+              <h2 className="section-title">Você não corre risco nenhum</h2>
+              <p className="mt-3 text-lg leading-relaxed text-muted-foreground">Baixe, imprima e aplique. Se em 7 dias achar que o material não serve para você, devolvemos o valor integral, sem pergunta nenhuma.</p>
             </div>
           </div>
         </div>

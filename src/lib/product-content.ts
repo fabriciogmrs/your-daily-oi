@@ -44,7 +44,22 @@ export const audiences: { emoji: string; title: string; text: string; tone: Tone
   { emoji: '🧑‍🏫', title: 'Profissionais', text: 'Material para utilizar em atendimentos, reforço e atividades educativas.', tone: 'leaf' },
 ];
 
-export const offerItems = ['442 páginas', '13 categorias', '3 níveis de dificuldade', 'PDF pronto para imprimir', 'Download imediato', 'Acesso vitalício'];
+export const offerItems = [
+  '442 atividades prontas para imprimir',
+  '13 categorias organizadas por habilidade',
+  '3 níveis de dificuldade: fácil, médio e difícil',
+  'Gabaritos inclusos para conferir as respostas',
+  'Para crianças de 3 a 12 anos',
+  'Imprima quantas vezes quiser, para quantas turmas quiser',
+  'Acesso vitalício, sem mensalidade',
+  'Atualizações futuras gratuitas',
+];
+
+export const bonuses: { title: string; text: string; value: string; tone: Tone }[] = [
+  { title: 'Pacote Matemática', text: '45 atividades de contagem, sequência, soma, subtração e pintar pelo resultado.', value: 'R$27', tone: 'sky' },
+  { title: 'Jogos de Recortar', text: '30 atividades manipulativas: jogo da memória com verso, mosaico espelhado, colmeia da memória e tabuleiro de ligações.', value: 'R$17', tone: 'leaf' },
+  { title: 'Caça-palavras com Gabarito', text: '30 caça-palavras em 10 temas e 3 níveis, com todas as respostas prontas para conferir.', value: 'R$17', tone: 'bubble' },
+];
 
 export const faqs = [
   { question: 'O material é digital?', answer: 'Sim. É um pacote digital em PDF. Nenhum material físico é enviado — você baixa e imprime as páginas que quiser.' },
