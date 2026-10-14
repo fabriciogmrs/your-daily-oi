@@ -52,9 +52,9 @@ function Index() {
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="bg-tangerine px-4 py-2 text-center text-sm font-extrabold text-primary-foreground">⏳ Preço de lançamento até 31 de outubro — depois volta para R$47</div>
       <div className="page-width flex h-18 items-center justify-between gap-4">
-        <a href="#" className="flex items-center gap-2" aria-label="Aprender Brincando, início">
+        <a href="#" className="flex items-center gap-2" aria-label="Brincatividades, início">
           <span className="blob flex size-11 items-center justify-center bg-sun font-heading text-xl font-extrabold">A</span>
-          <span className="font-heading text-xl font-extrabold leading-none">aprender<span className="text-bubble">brincando</span></span>
+          <span className="font-heading text-xl font-extrabold leading-none">brinc<span className="text-bubble">atividades</span></span>
         </a>
         <nav className="hidden items-center gap-7 text-sm font-bold md:flex" aria-label="Navegação principal">
           <a className="hover:text-primary" href="#pacote">O pacote</a>
