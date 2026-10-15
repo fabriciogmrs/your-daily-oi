@@ -101,8 +101,8 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
           <circle cx={x} cy={y} r="3.4" fill={C.ink} />
           <text x={x + (x > 120 ? 9 : x < 120 ? -9 : 0)} y={y - 6} fontSize="10" fontWeight="800" textAnchor="middle" fill={C.ink}>{i + 1}</text>
         </g>)}
-        <E x={40} y={120} ch="⭐" size={13} />
-        <E x={200} y={140} ch="✨" size={13} />
+        <E x={34} y={118} ch="☁️" size={15} />
+        <E x={206} y={118} ch="🌙" size={15} />
         <text x={120} y={266} fontSize="9.5" fontWeight="700" textAnchor="middle" fill={C.soft}>Que figura apareceu?</text>
         <Dash x={92} y={270} w={56} h={18} rx={9} col={C.grape} />
       </g>;
