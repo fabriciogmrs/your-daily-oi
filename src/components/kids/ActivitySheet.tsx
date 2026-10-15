@@ -93,8 +93,8 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
       </g>;
     }
     case 'dots': {
-      const pts: [number, number][] = [[120, 104], [140, 128], [146, 158], [176, 196], [150, 196], [150, 226],
-        [120, 240], [90, 226], [90, 196], [64, 196], [94, 158], [100, 128]];
+      const pts: [number, number][] = [[120, 104], [146, 128], [154, 158], [193, 196], [159, 196], [159, 226],
+        [120, 240], [81, 226], [81, 196], [47, 196], [86, 158], [94, 128]];
       return <g>
         <path d={'M' + pts.map(p => p.join(' ')).join('L') + 'Z'} stroke={C.grape} strokeWidth="2.4" strokeDasharray="3 6" fill="none" />
         {pts.map(([x, y], i) => <g key={i}>
@@ -286,7 +286,7 @@ export function ActivitySheet({ kind, className = '', style }: { kind: SheetKind
         <circle cx="28" cy="32" r="14" fill="var(--paper)" opacity=".9" />
         <E x={28} y={38} ch={m.icon} size={19} />
         <text x={50} y={30} fontSize="15" fontWeight="800" fill={C.ink}>{m.title}</text>
-        <text x={50} y={43} fontSize="8.5" fontWeight="700" fill={C.soft}>Brincatividades</text>
+        <text x={50} y={43} fontSize="9" fontWeight="800" fill={C.soft}>Brincatividades</text>
         <rect x="170" y="22" width="54" height="17" rx="8.5" fill="var(--paper)" stroke={C.line} strokeWidth="1.4" />
         <text x="197" y="34" fontSize="8.5" fontWeight="800" textAnchor="middle" fill={C.soft}>{m.level.toUpperCase()}</text>
 
@@ -295,13 +295,13 @@ export function ActivitySheet({ kind, className = '', style }: { kind: SheetKind
         <text x="158" y="66" fontSize="8" fontWeight="800" fill={C.soft}>DATA</text>
         <line x1="182" y1="68" x2="224" y2="68" stroke={C.line} strokeWidth="1.6" />
 
-        <text x="16" y="86" fontSize="9.5" fontWeight="700" fill={C.ink}>✏️ {m.prompt}</text>
+        <text x="16" y="86" fontSize="8.6" fontWeight="700" fill={C.ink}>✏️ {m.prompt}</text>
 
         <Art kind={kind} />
 
         <line x1="16" y1="292" x2="224" y2="292" stroke={C.line} strokeWidth="1.4" strokeDasharray="4 4" />
-        <text x="16" y="306" fontSize="8" fontWeight="800" fill={C.soft}>⭐ Brincatividades</text>
-        <text x="224" y="306" fontSize="8" fontWeight="800" textAnchor="end" fill={C.soft}>PÁG. {m.page}</text>
+        <text x="16" y="306" fontSize="8.6" fontWeight="800" fill={C.soft}>⭐ Brincatividades</text>
+        <text x="224" y="306" fontSize="8.6" fontWeight="800" textAnchor="end" fill={C.soft}>PÁG. {m.page}</text>
       </svg>
     </div>
   );
