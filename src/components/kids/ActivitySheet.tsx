@@ -127,7 +127,7 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
         const a = (i * Math.PI) / 3;
         return { x: 120 + Math.cos(a) * 48, y: 160 + Math.sin(a) * 48, n: (i % 3) + 2, col: [C.sunSoft, C.pinkSoft, C.skySoft][i % 3] ?? C.sunSoft };
       });
-      const legend: [string, string, number][] = [[C.sun, '1', 52], [C.pink, '2', 104], [C.sky, '3', 156], [C.leaf, '4', 208]];
+      const legend: [string, string, number][] = [[C.sun, '1', 72], [C.pink, '2', 118], [C.sky, '3', 164], [C.leaf, '4', 210]];
       return <g>
         <E x={204} y={112} ch="🌞" size={20} />
         <E x={34} y={126} ch="🐞" size={16} />
