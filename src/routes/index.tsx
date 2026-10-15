@@ -233,12 +233,15 @@ function Index() {
         <div className="page-width">
           <SectionHead kicker="Prova social" title={<>Quem já usa <span className="text-bubble">conta como é.</span></>} tone="bubble">Histórias de mães, professoras e profissionais que já aplicaram as atividades.</SectionHead>
           <div className="mt-14 grid gap-6 md:grid-cols-3">
-            {testimonials.map(({ quote, role, tone }, i) => <figure key={role} className="reveal soft-card relative flex flex-col p-7" style={{ transitionDelay: `${i * 90}ms` }}>
+            {testimonials.map(({ quote, name, role, tone }, i) => <figure key={name} className="reveal soft-card relative flex flex-col p-7" style={{ transitionDelay: `${i * 90}ms` }}>
               <span className={`flex size-20 items-center justify-center rounded-full p-1 ${toneStyles[tone].soft}`}>
-                <img src={testimonialPhotos[i]} alt={`Foto de ${role}`} loading="lazy" className="size-full rounded-full object-cover ring-2 ring-card" />
+                <img src={testimonialPhotos[i]} alt={`Foto de ${name}`} loading="lazy" className="size-full rounded-full object-cover ring-2 ring-card" />
               </span>
               <blockquote className="mt-5 flex-1 text-lg leading-relaxed">“{quote}”</blockquote>
-              <figcaption className={`mt-6 border-t-2 border-border/60 pt-4 font-heading text-sm font-black uppercase tracking-wide ${toneStyles[tone].text}`}>{role}</figcaption>
+              <figcaption className="mt-6 border-t-2 border-border/60 pt-4">
+                <span className="block font-heading text-lg font-extrabold">{name}</span>
+                <span className={`block font-heading text-xs font-black uppercase tracking-wide ${toneStyles[tone].text}`}>{role}</span>
+              </figcaption>
             </figure>)}
           </div>
         </div>
