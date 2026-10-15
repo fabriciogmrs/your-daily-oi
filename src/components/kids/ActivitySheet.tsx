@@ -115,7 +115,7 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
           <circle cx={44} cy={116 + i * 32} r="15" fill={C.muted} />
           <E x={44} y={122 + i * 32} ch={a} size={17} />
           <circle cx={196} cy={116 + i * 32} r="15" fill={C.muted} />
-          <E x={196} y={122 + i * 32} ch={right[i]} size={17} />
+          <E x={196} y={122 + i * 32} ch={right[i] ?? ''} size={17} />
           <path d={`M60 ${116 + i * 32} C100 ${116 + i * 32} 130 ${116 + ((i + 2) % 5) * 32} 180 ${116 + ((i + 2) % 5) * 32}`}
             stroke={C.pink} strokeWidth="2.4" strokeDasharray="4 6" fill="none" />
         </g>)}
@@ -237,14 +237,19 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
         return <path d={`M${cx} ${cy + 13} C${cx - 22} ${cy - 3} ${cx - 12} ${cy - 18} ${cx} ${cy - 7} C${cx + 12} ${cy - 18} ${cx + 22} ${cy - 3} ${cx} ${cy + 13} Z`} fill={fill} opacity={op} />;
       };
       return <g>
-        {shapes.map((sh, i) => <g key={i}>
-          <rect x={22} y={104 + i * 40} width="44" height="34" rx="9" fill={C.muted} opacity=".5" />
-          {shape(sh, 44, 121 + i * 40, [C.sun, C.sky, C.pink, C.grape][i])}
-          <rect x={174} y={104 + i * 40} width="44" height="34" rx="9" fill={C.muted} opacity=".5" />
-          {shape(shapes[order[i]], 196, 121 + i * 40, C.ink, .8)}
-          <path d={`M68 ${121 + i * 40} C110 ${121 + i * 40} 120 ${121 + order[i] * 40} 172 ${121 + order[i] * 40}`}
-            stroke={C.pink} strokeWidth="2.4" strokeDasharray="4 6" fill="none" />
-        </g>)}
+        {shapes.map((sh, i) => {
+          const o = order[i] ?? 0;
+          const sil = shapes[o] ?? 'c';
+          const col = [C.sun, C.sky, C.pink, C.grape][i] ?? C.sun;
+          return <g key={i}>
+            <rect x={22} y={104 + i * 40} width="44" height="34" rx="9" fill={C.muted} opacity=".5" />
+            {shape(sh, 44, 121 + i * 40, col)}
+            <rect x={174} y={104 + i * 40} width="44" height="34" rx="9" fill={C.muted} opacity=".5" />
+            {shape(sil, 196, 121 + i * 40, C.ink, .8)}
+            <path d={`M68 ${121 + i * 40} C110 ${121 + i * 40} 120 ${121 + o * 40} 172 ${121 + o * 40}`}
+              stroke={C.pink} strokeWidth="2.4" strokeDasharray="4 6" fill="none" />
+          </g>;
+        })}
         <text x="120" y="278" fontSize="9.5" fontWeight="700" textAnchor="middle" fill={C.soft}>Algumas sombras se embaralharam!</text>
       </g>;
     }
