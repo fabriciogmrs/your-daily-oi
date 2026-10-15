@@ -64,16 +64,18 @@ function Index() {
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="bg-tangerine px-4 py-2 text-center text-sm font-extrabold text-primary-foreground">⏳ Preço de lançamento até 31 de outubro — depois volta para R$47</div>
       <div className="page-width flex h-18 items-center justify-between gap-4">
-        <a href="#" className="flex items-center gap-2" aria-label="Brincatividades, início">
-          <span className="blob flex size-11 items-center justify-center bg-sun font-heading text-xl font-extrabold">A</span>
-          <span className="font-heading text-xl font-extrabold leading-none">brinc<span className="text-bubble">atividades</span></span>
+        <a href="#" className="mr-2 flex items-center" aria-label="Brincatividades, início">
+          <span className="relative font-heading text-[25px] font-extrabold leading-none tracking-tight sm:text-[28px]">
+            brinc<span className="text-tangerine">atividades</span>
+            <Squiggle className="absolute -bottom-2.5 left-0 h-3.5 w-[42%] text-sun" />
+            <span className="absolute -right-3 bottom-1 size-2.5 rounded-full bg-bubble" />
+          </span>
         </a>
         <nav className="hidden items-center gap-7 text-sm font-bold md:flex" aria-label="Navegação principal">
           <a className="hover:text-primary" href="#pacote">O pacote</a>
           <a className="hover:text-primary" href="#exemplos">Exemplos</a>
           <a className="hover:text-primary" href="#duvidas">Dúvidas</a>
         </nav>
-        <Button onClick={() => document.getElementById('oferta')?.scrollIntoView({ behavior: 'smooth' })} className="rounded-full px-5 font-extrabold">R$27</Button>
       </div>
     </header>
 
@@ -139,7 +141,7 @@ function Index() {
 
       {/* EXEMPLOS */}
       <section id="exemplos" className="relative overflow-hidden py-20 sm:py-28">
-        <Cloud className="float-slow absolute right-[-30px] top-16 w-40 text-bubble-soft" />
+        <Cloud className="float-slow absolute right-[-30px] top-16 hidden w-40 text-bubble-soft sm:block" />
         <div className="page-width">
           <SectionHead kicker="Espie por dentro" title={<>Exemplos das <span className="text-bubble">atividades</span></>} tone="bubble">Páginas coloridas, claras e prontas para a criança pegar o lápis e começar.</SectionHead>
         </div>
