@@ -73,7 +73,7 @@ export const faqs = [
 
 export const testimonials: { quote: string; role: string; emoji: string; tone: Tone }[] = [
   { quote: 'Minha filha adorou as atividades! Agora a gente passa um tempinho fazendo as tarefinhas juntas. Gostei muito da variedade, valeu a pena 😊', role: 'Mãe de uma criança', emoji: '👩‍👧', tone: 'bubble' },
-  { quote: 'Gostei bastante! Tem muitas opções de atividades e isso ajuda muito na hora de preparar algo diferente para as crianças. Material bem variado!', role: 'Professora infantil', emoji: '👩‍🏫', tone: 'sky' },
+  { quote: 'Gostei bastante! Tem muitas opções de atividades e isso ajuda muito na hora de preparar algo diferente para as crianças. Material bem variado!', role: 'Professor e pai', emoji: '👨‍🏫', tone: 'sky' },
   { quote: 'Acho muito importante incentivar o aprendizado através das brincadeiras. Gostei da proposta de reunir tantas atividades em um só material, facilita bastante para as famílias.', role: 'Psicóloga infantil', emoji: '🧑‍🏫', tone: 'leaf' },
 ];
 
