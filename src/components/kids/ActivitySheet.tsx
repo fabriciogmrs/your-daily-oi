@@ -65,8 +65,7 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
       return <g>
         {rows.map(([pic, letters], r) => <g key={r}>
           <E x={34} y={124 + r * 42} ch={pic} size={22} />
-          {letters.map((l, i) => <Tile key={i} x={58 + i * 36} y={100 + r * 42} txt={l === '?' ? '' : l} fill={l === '?' ? C.sunSoft : C.muted} s={32} />)}
-          {l === '?' && <text x={58 + letters.indexOf('?') * 36 + 16} y={124 + r * 42} fontSize="18" fontWeight="800" textAnchor="middle" fill={C.soft}>?</text>}
+          {letters.map((l, i) => <Tile key={i} x={58 + i * 36} y={100 + r * 42} txt={l} fill={l === '?' ? C.sunSoft : C.muted} s={32} />)}
         </g>)}
         <g>
           <text x={20} y={274} fontSize="9.5" fontWeight="700" fill={C.soft}>Circule as vogais:</text>
