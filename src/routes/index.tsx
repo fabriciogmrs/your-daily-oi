@@ -48,7 +48,7 @@ function GalleryRow({ kinds, reverse = false }: { kinds: SheetKind[]; reverse?: 
   const doubled = [...kinds, ...kinds];
   return <div className="marquee py-4">
     <div className={`marquee-track${reverse ? ' reverse' : ''}`}>
-      {doubled.map((kind, i) => <ActivitySheet key={`${kind}-${i}`} kind={kind} aria-hidden={i >= kinds.length}
+      {doubled.map((kind, i) => <ActivitySheet key={`${kind}-${i}`} kind={kind}
         className="sheet-tilt aspect-[3/4] w-44 shrink-0 sm:w-56" style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }} />)}
     </div>
   </div>;
@@ -142,13 +142,12 @@ function Index() {
         <Cloud className="float-slow absolute right-[-30px] top-16 w-40 text-bubble-soft" />
         <div className="page-width">
           <SectionHead kicker="Espie por dentro" title={<>Exemplos das <span className="text-bubble">atividades</span></>} tone="bubble">Páginas coloridas, claras e prontas para a criança pegar o lápis e começar.</SectionHead>
-          <div className="mt-14 grid grid-cols-2 gap-5 sm:gap-8 md:grid-cols-4">
-            {gallery.map(({ kind, rot }, i) => <div key={kind} className="reveal" style={{ transitionDelay: `${(i % 4) * 80}ms` }}>
-              <ActivitySheet kind={kind} className="sheet-tilt aspect-[3/4] w-full" style={{ transform: `rotate(${rot}deg)` }} />
-            </div>)}
-          </div>
-          <p className="mt-8 text-center text-xs text-muted-foreground">Ilustrações representativas do estilo das atividades.</p>
         </div>
+        <div className="mt-14 space-y-6">
+          <GalleryRow kinds={galleryRowA} />
+          <GalleryRow kinds={galleryRowB} reverse />
+        </div>
+        <p className="page-width mt-8 text-center text-xs text-muted-foreground">Ilustrações representativas do estilo das atividades.</p>
       </section>
 
       {/* DESENVOLVIMENTO */}
