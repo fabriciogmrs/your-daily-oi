@@ -41,10 +41,18 @@ function SectionHead({ kicker, title, tone, children }: { kicker: string; title:
   </div>;
 }
 
-const gallery: { kind: SheetKind; rot: number }[] = [
-  { kind: 'maze', rot: -4 }, { kind: 'letters', rot: 3 }, { kind: 'numbers', rot: -2 }, { kind: 'dots', rot: 4 },
-  { kind: 'match', rot: -3 }, { kind: 'color', rot: 2 }, { kind: 'trace', rot: -4 }, { kind: 'shapes', rot: 3 },
-];
+const galleryRowA: SheetKind[] = ['maze', 'wordsearch', 'color', 'math', 'dots', 'draw'];
+const galleryRowB: SheetKind[] = ['letters', 'shadow', 'numbers', 'match', 'trace', 'shapes'];
+
+function GalleryRow({ kinds, reverse = false }: { kinds: SheetKind[]; reverse?: boolean }) {
+  const doubled = [...kinds, ...kinds];
+  return <div className="marquee py-4">
+    <div className={`marquee-track${reverse ? ' reverse' : ''}`}>
+      {doubled.map((kind, i) => <ActivitySheet key={`${kind}-${i}`} kind={kind} aria-hidden={i >= kinds.length}
+        className="sheet-tilt aspect-[3/4] w-44 shrink-0 sm:w-56" style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }} />)}
+    </div>
+  </div>;
+}
 
 function Index() {
   useReveal();
