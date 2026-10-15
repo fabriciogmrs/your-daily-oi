@@ -3,4 +3,4 @@
 - [x] Build the Brazilian Portuguese product sales page with 442 total activities, 13 categories, benefits, offer and FAQ.
 - [x] Verify the page and its interactions on large and small screens.
 - [ ] Connect purchase and digital delivery — blocked by missing owner checkout link and original PDF files.
-- [x] Match each testimonial photo with its real name and role label (Bruna — mãe; Benjamin — professor e pai; Rafaela — psicóloga).
+- [x] Match each testimonial photo with its real name and role label (Bruna — mãe; Benjamin — professor e pai; Rafaela — psicóloga).- [ ] Cabeçalho: remover o preço "R$27" e o símbolo "A" antes de "brincatividades"; deixar o nome com mais identidade visual (logo tipográfico próprio).

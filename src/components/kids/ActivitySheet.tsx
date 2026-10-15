@@ -16,18 +16,18 @@ const C = {
 };
 
 const meta: Record<SheetKind, { title: string; prompt: string; icon: string; level: string; band: string; page: number }> = {
-  maze: { title: 'Labirinto', prompt: 'Ajude a abelhinha a chegar até a flor!', icon: '🐝', level: 'fácil', band: C.sunSoft, page: 12 },
-  letters: { title: 'Alfabetização', prompt: 'Complete cada palavra com a letra que falta.', icon: '🔤', level: 'fácil', band: C.pinkSoft, page: 34 },
-  numbers: { title: 'Contagem', prompt: 'Conte os itens e escreva o número certo.', icon: '🔢', level: 'fácil', band: C.skySoft, page: 58 },
-  dots: { title: 'Ligue os pontos', prompt: 'Siga os números de 1 a 12 e veja o que aparece.', icon: '🚀', level: 'médio', band: C.grapeSoft, page: 71 },
-  match: { title: 'Associação', prompt: 'Ligue cada bichinho até a sua casinha.', icon: '🐾', level: 'fácil', band: C.leafSoft, page: 19 },
-  color: { title: 'Pinte pelo número', prompt: 'Pinte cada parte seguindo a cor do número.', icon: '🎨', level: 'médio', band: C.orangeSoft, page: 46 },
+  maze: { title: 'Labirinto', prompt: 'Ajude a abelha a chegar na flor!', icon: '🐝', level: 'fácil', band: C.sunSoft, page: 12 },
+  letters: { title: 'Alfabetização', prompt: 'Complete com a letra que falta.', icon: '🔤', level: 'fácil', band: C.pinkSoft, page: 34 },
+  numbers: { title: 'Contagem', prompt: 'Conte e escreva o número certo.', icon: '🔢', level: 'fácil', band: C.skySoft, page: 58 },
+  dots: { title: 'Ligue os pontos', prompt: 'Siga os números de 1 a 12.', icon: '🚀', level: 'médio', band: C.grapeSoft, page: 71 },
+  match: { title: 'Associação', prompt: 'Ligue cada bichinho à casinha.', icon: '🐾', level: 'fácil', band: C.leafSoft, page: 19 },
+  color: { title: 'Pinte pelo número', prompt: 'Pinte cada parte pela cor do número.', icon: '🎨', level: 'médio', band: C.orangeSoft, page: 46 },
   trace: { title: 'Coordenação motora', prompt: 'Cubra o tracejado sem sair da linha.', icon: '✏️', level: 'fácil', band: C.skySoft, page: 8 },
-  shapes: { title: 'Raciocínio lógico', prompt: 'Descubra qual figura vem no lugar da interrogação.', icon: '🧩', level: 'médio', band: C.sunSoft, page: 88 },
-  wordsearch: { title: 'Caça-palavras', prompt: 'Encontre as 4 palavras escondidas no quadro.', icon: '🔎', level: 'difícil', band: C.leafSoft, page: 103 },
-  math: { title: 'Continhas', prompt: 'Resolva e pinte a resposta pela cor da legenda.', icon: '➕', level: 'médio', band: C.pinkSoft, page: 62 },
-  shadow: { title: 'Sombras', prompt: 'Ligue cada figura até a sua sombra.', icon: '🌗', level: 'médio', band: C.grapeSoft, page: 27 },
-  draw: { title: 'Complete o desenho', prompt: 'Desenhe a outra metade e pinte o seu.', icon: '🦋', level: 'difícil', band: C.orangeSoft, page: 77 },
+  shapes: { title: 'Raciocínio lógico', prompt: 'Qual figura completa a fila?', icon: '🧩', level: 'médio', band: C.sunSoft, page: 88 },
+  wordsearch: { title: 'Caça-palavras', prompt: 'Encontre as 4 palavras escondidas.', icon: '🔎', level: 'difícil', band: C.leafSoft, page: 103 },
+  math: { title: 'Continhas', prompt: 'Resolva e pinte a resposta.', icon: '➕', level: 'médio', band: C.pinkSoft, page: 62 },
+  shadow: { title: 'Sombras', prompt: 'Ligue cada figura à sua sombra.', icon: '🌗', level: 'médio', band: C.grapeSoft, page: 27 },
+  draw: { title: 'Complete o desenho', prompt: 'Complete a outra metade e pinte!', icon: '🦋', level: 'difícil', band: C.orangeSoft, page: 77 },
 };
 
 const E = ({ x, y, ch, size = 18 }: { x: number; y: number; ch: string; size?: number }) =>
