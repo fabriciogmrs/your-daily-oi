@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type SheetKind = 'maze' | 'letters' | 'numbers' | 'dots' | 'match' | 'color' | 'trace' | 'shapes';
+export type SheetKind = 'maze' | 'letters' | 'numbers' | 'dots' | 'match' | 'color' | 'trace' | 'shapes' | 'wordsearch' | 'math' | 'shadow' | 'draw';
 
 const C = { ink: 'var(--foreground)', sun: 'var(--sun)', orange: 'var(--tangerine)', sky: 'var(--sky)', leaf: 'var(--leaf)', pink: 'var(--bubble)', grape: 'var(--grape)', line: 'var(--border)' };
 
@@ -13,6 +13,10 @@ const titles: Record<SheetKind, [string, string]> = {
   color: ['Para colorir', 'Pinte cada parte com a cor indicada.'],
   trace: ['Coordenação', 'Cubra o tracejado com o lápis.'],
   shapes: ['Raciocínio', 'Qual forma vem a seguir?'],
+  wordsearch: ['Caça-palavras', 'Encontre as 6 palavras escondidas.'],
+  math: ['Continhas', 'Resolva e pinte pelo resultado.'],
+  shadow: ['Sombras', 'Ligue cada figura à sua sombra.'],
+  draw: ['Complete o desenho', 'Desenhe a outra metade.'],
 };
 
 function Art({ kind }: { kind: SheetKind }): ReactNode {
