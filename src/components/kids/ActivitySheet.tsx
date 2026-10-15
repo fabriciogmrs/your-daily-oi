@@ -125,7 +125,7 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
     case 'color': {
       const petals = Array.from({ length: 6 }).map((_, i) => {
         const a = (i * Math.PI) / 3;
-        return { x: 120 + Math.cos(a) * 48, y: 160 + Math.sin(a) * 48, n: (i % 3) + 2, col: [C.sunSoft, C.pinkSoft, C.skySoft][i % 3] ?? C.sunSoft };
+        return { x: Math.round((120 + Math.cos(a) * 48) * 100) / 100, y: Math.round((160 + Math.sin(a) * 48) * 100) / 100, n: (i % 3) + 2, col: [C.sunSoft, C.pinkSoft, C.skySoft][i % 3] ?? C.sunSoft };
       });
       const legend: [string, string, number][] = [[C.sun, '1', 72], [C.pink, '2', 118], [C.sky, '3', 164], [C.leaf, '4', 210]];
       return <g>

@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState, type ReactNode } from 'react';
-import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, X } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp, X } from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '@/components/ui/button';
-import { audiences, bonuses, categories, faqs, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
+import { audiences, bonuses, categories, faqs, levels, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
 import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
 import { Cloud, Dot, Pencil, Squiggle, Star, useReveal } from '@/components/kids/Decor';
 import heroMockup from '@/assets/hero-mockup.png';
@@ -135,6 +135,31 @@ function Index() {
               <span className="font-heading text-5xl font-extrabold leading-none">442</span>
               <span className="mt-1 font-bold">páginas com gabaritos nas atividades que precisam</span>
             </article>
+          </div>
+        </div>
+      </section>
+
+      {/* NÍVEIS DE DIFICULDADE */}
+      <section id="níveis" className="py-16 sm:py-20">
+        <div className="page-width">
+          <div className="reveal soft-card p-6 sm:p-10">
+            <div className="text-center">
+              <span className="kicker bg-leaf-soft text-leaf"><TrendingUp size={14} /> Três níveis</span>
+              <h2 className="mt-4 font-heading text-3xl font-extrabold sm:text-4xl">Escolha o nível <span className="text-leaf">certo para hoje.</span></h2>
+              <p className="mx-auto mt-3 max-w-xl text-muted-foreground">Cada categoria aparece em versão fácil, média e difícil: a criança começa no próprio ritmo e vai subindo.</p>
+            </div>
+            <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              {levels.map(({ name, ages, text, example, tone }, i) =>
+                <article key={name} className={`rounded-[24px] ${toneStyles[tone].soft} p-5`}>
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className={`font-heading text-2xl font-extrabold ${toneStyles[tone].text}`}>{name}</h3>
+                    <span className="flex gap-1.5">{[0, 1, 2].map(d => <span key={d} className={`size-2.5 rounded-full ${d <= i ? toneStyles[tone].solid : 'bg-muted-foreground/20'}`} />)}</span>
+                  </div>
+                  <span className="mt-3 inline-block rounded-full bg-background/80 px-3 py-1 text-xs font-black uppercase tracking-wide">{ages}</span>
+                  <p className="mt-3 text-sm leading-snug text-muted-foreground">{text}</p>
+                  <p className="mt-3 text-xs font-bold"><span className="text-muted-foreground">Exemplo:</span> {example}</p>
+                </article>)}
+            </div>
           </div>
         </div>
       </section>

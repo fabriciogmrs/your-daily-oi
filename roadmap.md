@@ -6,3 +6,4 @@
 - [x] Match each testimonial photo with its real name and role label (Bruna — mãe; Benjamin — professor e pai; Rafaela — psicóloga).
 - [x] Cabeçalho: preço "R$27" e símbolo "A" removidos; nome virou logotipo próprio (brinc + atividades em tangerina, rabisco amarelo e ponto rosa).
 - [x] Aprimoramento das folhas de exemplo encerrado a pedido do dono (parar de polir a seção).
+- [x] Adicionar bloco pequeno com os 3 níveis de dificuldade (selos Fácil/Médio/Difícil com idade, frase e exemplo).
