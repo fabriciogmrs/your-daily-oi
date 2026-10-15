@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-export type SheetKind = 'maze' | 'letters' | 'numbers' | 'dots' | 'match' | 'color' | 'trace' | 'shapes';
+export type SheetKind = 'maze' | 'letters' | 'numbers' | 'dots' | 'match' | 'color' | 'trace' | 'shapes' | 'wordsearch' | 'math' | 'shadow' | 'draw';
 
 const C = { ink: 'var(--foreground)', sun: 'var(--sun)', orange: 'var(--tangerine)', sky: 'var(--sky)', leaf: 'var(--leaf)', pink: 'var(--bubble)', grape: 'var(--grape)', line: 'var(--border)' };
 
@@ -13,6 +13,10 @@ const titles: Record<SheetKind, [string, string]> = {
   color: ['Para colorir', 'Pinte cada parte com a cor indicada.'],
   trace: ['Coordenação', 'Cubra o tracejado com o lápis.'],
   shapes: ['Raciocínio', 'Qual forma vem a seguir?'],
+  wordsearch: ['Caça-palavras', 'Encontre as 6 palavras escondidas.'],
+  math: ['Continhas', 'Resolva e pinte pelo resultado.'],
+  shadow: ['Sombras', 'Ligue cada figura à sua sombra.'],
+  draw: ['Complete o desenho', 'Desenhe a outra metade.'],
 };
 
 function Art({ kind }: { kind: SheetKind }): ReactNode {
@@ -49,6 +53,29 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
       <circle cx="30" cy="115" r="18" fill={C.pink} /><rect x="62" y="97" width="36" height="36" rx="6" fill={C.sky} />
       <rect x="112" y="97" width="38" height="38" rx="8" fill="none" strokeDasharray="5 5" /><text x="131" y="124" textAnchor="middle" fontSize="22" fontWeight="800" fill={C.ink} stroke="none">?</text>
       <circle cx="178" cy="45" r="8" fill={C.leaf} stroke="none" /></g>;
+    case 'wordsearch': { const grid = ['SOLARC', 'ABLUVE', 'TLHEOA', 'OPATRA', 'BOLSAP', 'GATOLO'];
+      const found: [number, number, number][] = [[0, 0, 3], [5, 0, 4], [3, 1, 3]];
+      return <g fontFamily="Baloo 2, sans-serif" fontWeight="800" fontSize="17">
+        {grid.map((row, r) => row.split('').map((ch, c) => <g key={`${r}-${c}`}>
+          <rect x={8 + c * 31} y={6 + r * 25} width="29" height="23" rx="5" fill={found.some(([fr, fc, len]) => r === fr && c >= fc && c < fc + len) ? C.sun : 'var(--muted)'} />
+          <text x={22.5 + c * 31} y={23 + r * 25} textAnchor="middle" fill={C.ink}>{ch}</text></g>))}</g>; }
+    case 'math': return <g fontFamily="Baloo 2, sans-serif" fontWeight="800" fontSize="24">
+      {[['3 + 2 =', C.orange], ['7 - 4 =', C.sky], ['4 + 4 =', C.leaf]].map(([eq, col], r) => <g key={r}>
+        <text x="16" y={42 + r * 50} fill={C.ink}>{eq as string}</text>
+        <rect x="128" y={16 + r * 50} width="52" height="36" rx="10" fill={col as string} opacity=".25" stroke={col as string} strokeWidth="3" strokeDasharray="6 5" /></g>)}</g>;
+    case 'shadow': return <g {...s}>
+      <path d="M30 40 c-14 0 -18 20 -4 24 c-2 14 16 20 22 8 c12 6 24 -6 16 -18 c8 -12 -6 -26 -18 -18 c-4 -8 -12 -10 -16 -12z" fill={C.sun} stroke="none" transform="translate(10 10)" />
+      <path d="M30 40 c-14 0 -18 20 -4 24 c-2 14 16 20 22 8 c12 6 24 -6 16 -18 c8 -12 -6 -26 -18 -18 c-4 -8 -12 -10 -16 -12z" fill={C.ink} opacity=".85" stroke="none" transform="translate(120 10)" />
+      <path d="M70 45 C95 45 100 45 118 45" stroke={C.pink} strokeDasharray="4 6" />
+      <polygon points="45,95 65,135 25,135" fill={C.sky} stroke="none" />
+      <polygon points="155,95 175,135 135,135" fill={C.ink} opacity=".85" stroke="none" />
+      <path d="M70 118 C95 118 105 118 128 118" stroke={C.pink} strokeDasharray="4 6" /></g>;
+    case 'draw': return <g {...s}>
+      <line x1="100" y1="8" x2="100" y2="150" stroke={C.line} strokeDasharray="4 6" />
+      <path d="M100 30 C60 30 40 60 45 90 C50 125 75 140 100 140" stroke={C.grape} strokeWidth="4" />
+      <circle cx="78" cy="62" r="5" fill={C.ink} stroke="none" />
+      <path d="M100 30 C140 30 160 60 155 90 C150 125 125 140 100 140" stroke={C.grape} strokeWidth="3" strokeDasharray="5 7" opacity=".5" />
+      <path d="M60 100 q 10 10 20 0" stroke={C.pink} /></g>;
   }
 }
 
