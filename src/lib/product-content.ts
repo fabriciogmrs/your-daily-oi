@@ -77,3 +77,9 @@ export const testimonials: { quote: string; name: string; role: string; emoji: s
   { quote: 'Acho muito importante incentivar o aprendizado através das brincadeiras. Gostei da proposta de reunir tantas atividades em um só material, facilita bastante para as famílias.', name: 'Rafaela', role: 'Psicóloga infantil', emoji: '🧑‍🏫', tone: 'leaf' },
 ];
 
+
+export const levels: { name: string; ages: string; text: string; example: string; tone: Tone }[] = [
+  { name: 'Fácil', ages: '3 a 5 anos', text: 'Primeiro contato com traços, formas e cores.', example: 'Tracejado, colorir e ligar pontos', tone: 'leaf' },
+  { name: 'Médio', ages: '6 a 8 anos', text: 'Para quem já escreve, conta e segue instruções.', example: 'Labirintos, continhas e associação', tone: 'sky' },
+  { name: 'Difícil', ages: '9 a 12 anos', text: 'Desafios de lógica, atenção e raciocínio.', example: 'Caça-palavras, sombras e sudoku de figuras', tone: 'grape' },
+];
