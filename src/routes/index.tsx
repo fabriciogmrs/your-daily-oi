@@ -139,7 +139,7 @@ function Index() {
 
       {/* EXEMPLOS */}
       <section id="exemplos" className="relative overflow-hidden py-20 sm:py-28">
-        <Cloud className="float-slow absolute right-[-30px] top-16 w-40 text-bubble-soft" />
+        <Cloud className="float-slow absolute right-[-30px] top-16 hidden w-40 text-bubble-soft sm:block" />
         <div className="page-width">
           <SectionHead kicker="Espie por dentro" title={<>Exemplos das <span className="text-bubble">atividades</span></>} tone="bubble">Páginas coloridas, claras e prontas para a criança pegar o lápis e começar.</SectionHead>
         </div>

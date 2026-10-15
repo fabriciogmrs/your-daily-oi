@@ -125,19 +125,23 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
     case 'color': {
       const petals = Array.from({ length: 6 }).map((_, i) => {
         const a = (i * Math.PI) / 3;
-        return { x: 120 + Math.cos(a) * 44, y: 168 + Math.sin(a) * 44, n: (i % 3) + 2, col: [C.sunSoft, C.pinkSoft, C.skySoft][i % 3] };
+        return { x: 120 + Math.cos(a) * 48, y: 160 + Math.sin(a) * 48, n: (i % 3) + 2, col: [C.sunSoft, C.pinkSoft, C.skySoft][i % 3] ?? C.sunSoft };
       });
-      const legend: [string, string, number][] = [[C.sun, '1', 44], [C.pink, '2', 96], [C.sky, '3', 148], [C.leaf, '4', 200]];
+      const legend: [string, string, number][] = [[C.sun, '1', 52], [C.pink, '2', 104], [C.sky, '3', 156], [C.leaf, '4', 208]];
       return <g>
+        <E x={204} y={112} ch="🌞" size={20} />
+        <E x={34} y={126} ch="🐞" size={16} />
         {petals.map((p, i) => <g key={i}>
-          <ellipse cx={p.x} cy={p.y} rx="24" ry="18" transform={`rotate(${(i * 60)} ${p.x} ${p.y})`} fill={p.col} stroke={C.ink} strokeWidth="2.2" />
-          <text x={p.x} y={p.y + 4} fontSize="12" fontWeight="800" textAnchor="middle" fill={C.ink}>{p.n}</text>
+          <ellipse cx={p.x} cy={p.y} rx="27" ry="20" transform={`rotate(${(i * 60)} ${p.x} ${p.y})`} fill={p.col} stroke={C.ink} strokeWidth="2.2" />
+          <text x={p.x} y={p.y + 4} fontSize="13" fontWeight="800" textAnchor="middle" fill={C.ink}>{p.n}</text>
         </g>)}
-        <circle cx="120" cy="168" r="22" fill={C.sunSoft} stroke={C.ink} strokeWidth="2.2" />
-        <text x="120" y="173" fontSize="14" fontWeight="800" textAnchor="middle" fill={C.ink}>1</text>
-        <path d="M120 192 v46" stroke={C.leaf} strokeWidth="5" strokeLinecap="round" />
-        <ellipse cx="142" cy="226" rx="16" ry="9" transform="rotate(-28 142 226)" fill={C.leafSoft} stroke={C.ink} strokeWidth="2.2" />
-        <text x="142" y="230" fontSize="11" fontWeight="800" textAnchor="middle" fill={C.ink}>4</text>
+        <circle cx="120" cy="160" r="25" fill={C.sunSoft} stroke={C.ink} strokeWidth="2.2" />
+        <text x="120" y="166" fontSize="16" fontWeight="800" textAnchor="middle" fill={C.ink}>1</text>
+        <path d="M120 188 v50" stroke={C.leaf} strokeWidth="5" strokeLinecap="round" />
+        <ellipse cx="146" cy="222" rx="18" ry="10" transform="rotate(-26 146 222)" fill={C.leafSoft} stroke={C.ink} strokeWidth="2.2" />
+        <text x="146" y="226" fontSize="11" fontWeight="800" textAnchor="middle" fill={C.ink}>4</text>
+        <ellipse cx="94" cy="236" rx="18" ry="10" transform="rotate(26 94 236)" fill={C.leafSoft} stroke={C.ink} strokeWidth="2.2" />
+        <text x="94" y="240" fontSize="11" fontWeight="800" textAnchor="middle" fill={C.ink}>4</text>
         <text x="20" y="272" fontSize="9.5" fontWeight="700" fill={C.soft}>Legenda:</text>
         {legend.map(([col, n, x]) => <g key={n}>
           <circle cx={x} cy={268} r="9" fill={col} />
@@ -203,9 +207,9 @@ function Art({ kind }: { kind: SheetKind }): ReactNode {
             <text x={40 + c * cell + cell / 2 - 1} y={100 + r * cell + 14} fontSize="11" fontWeight="800" textAnchor="middle" fill={C.ink}>{ch}</text>
           </g>;
         }))}
-        <rect x="40" y="100" width="148" height="128" rx="9" fill="none" stroke={C.ink} strokeWidth="2" />
-        <text x="120" y="248" fontSize="10" fontWeight="800" textAnchor="middle" fill={C.ink}>🌞 SOL   🐱 GATO   ⚽ BOLA   🏠 CASA</text>
-        <text x="120" y="270" fontSize="9.5" fontWeight="700" textAnchor="middle" fill={C.soft}>Circule as palavras que você encontrou.</text>
+        <rect x="38" y="98" width="164" height="145" rx="10" fill="none" stroke={C.ink} strokeWidth="2" />
+        <text x="120" y="262" fontSize="10" fontWeight="800" textAnchor="middle" fill={C.ink}>🌞 SOL   🐱 GATO   ⚽ BOLA   🏠 CASA</text>
+        <text x="120" y="280" fontSize="9" fontWeight="700" textAnchor="middle" fill={C.soft}>Circule as palavras que você encontrou.</text>
       </g>;
     }
     case 'math': {
@@ -279,7 +283,8 @@ export function ActivitySheet({ kind, className = '', style }: { kind: SheetKind
       <svg viewBox="0 0 240 320" className="h-full w-full" fontFamily="'Baloo 2', 'Nunito', sans-serif">
         <path d="M8 20 a12 12 0 0 1 12 -12 h200 a12 12 0 0 1 12 12 v34 h-224 z" fill={m.band} />
         <rect x="8" y="8" width="224" height="304" rx="12" fill="none" stroke={C.line} strokeWidth="1.6" strokeDasharray="6 5" />
-        <E x={28} y={38} ch={m.icon} size={20} />
+        <circle cx="28" cy="32" r="14" fill="var(--paper)" opacity=".9" />
+        <E x={28} y={38} ch={m.icon} size={19} />
         <text x={50} y={30} fontSize="15" fontWeight="800" fill={C.ink}>{m.title}</text>
         <text x={50} y={43} fontSize="8.5" fontWeight="700" fill={C.soft}>Brincatividades</text>
         <rect x="170" y="22" width="54" height="17" rx="8.5" fill="var(--paper)" stroke={C.line} strokeWidth="1.4" />
