@@ -280,7 +280,7 @@ export function ActivitySheet({ kind, className = '', style }: { kind: SheetKind
   const m = meta[kind];
   return (
     <div className={`sheet overflow-hidden ${className}`} style={style} aria-hidden="true">
-      <svg viewBox="0 0 240 320" className="h-full w-full" fontFamily="'Baloo 2', 'Nunito', sans-serif">
+      <svg viewBox="0 0 240 320" className="h-full w-full" fontFamily="'Baloo 2', 'Nunito', 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif">
         <path d="M8 20 a12 12 0 0 1 12 -12 h200 a12 12 0 0 1 12 12 v34 h-224 z" fill={m.band} />
         <rect x="8" y="8" width="224" height="304" rx="12" fill="none" stroke={C.line} strokeWidth="1.6" strokeDasharray="6 5" />
         <circle cx="28" cy="32" r="14" fill="var(--paper)" opacity=".9" />
