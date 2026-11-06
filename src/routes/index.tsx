@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState, type ReactNode } from 'react';
-import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp, X } from 'lucide-react';
-import * as Dialog from '@radix-ui/react-dialog';
+import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { audiences, bonuses, categories, faqs, levels, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
 import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
@@ -29,8 +28,10 @@ export const Route = createFileRoute('/')({
   component: Index,
 });
 
-function CtaButton({ children, onClick, className = '' }: { children: ReactNode; onClick: () => void; className?: string }) {
-  return <Button onClick={onClick} className={`cta-button h-auto rounded-full px-8 py-5 font-heading text-lg font-extrabold tracking-wide sm:text-xl ${className}`}>{children} <ArrowRight className="size-6" /></Button>;
+const CHECKOUT_URL = 'https://pay.cakto.com.br/r9kmwui_1288422';
+
+function CtaButton({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <Button asChild className={`cta-button h-auto rounded-full px-8 py-5 font-heading text-lg font-extrabold tracking-wide sm:text-xl ${className}`}><a href={CHECKOUT_URL}>{children} <ArrowRight className="size-6" /></a></Button>;
 }
 
 function SectionHead({ kicker, title, tone, children }: { kicker: string; title: ReactNode; tone: keyof typeof toneStyles; children?: ReactNode }) {
@@ -56,9 +57,7 @@ function GalleryRow({ kinds, reverse = false }: { kinds: SheetKind[]; reverse?: 
 
 function Index() {
   useReveal();
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const buy = () => setCheckoutOpen(true);
 
   return <>
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
@@ -100,7 +99,7 @@ function Index() {
                   <div className="mt-1 text-xs font-black uppercase tracking-wider">{l}</div>
                 </div>)}
             </div>
-            <CtaButton onClick={buy} className="mt-8 w-full sm:w-auto">Quero meu pacote por R$27</CtaButton>
+            <CtaButton className="mt-8 w-full sm:w-auto">Quero meu pacote por R$27</CtaButton>
             <ul className="mx-auto mt-6 grid max-w-md grid-cols-2 gap-x-4 gap-y-2 text-sm font-bold lg:mx-0">
               {['Download imediato', 'Arquivo PDF', 'Acesso vitalício', 'Pronto para imprimir'].map(t => <li key={t} className="flex items-center gap-2"><span className="flex size-5 items-center justify-center rounded-full bg-leaf text-primary-foreground"><Check size={13} strokeWidth={4} /></span>{t}</li>)}
             </ul>
@@ -241,7 +240,7 @@ function Index() {
               <p className="font-heading text-8xl font-extrabold leading-none text-tangerine"><span className="align-top text-3xl">R$</span>27</p>
               <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-leaf px-4 py-1 text-sm font-extrabold text-primary-foreground">📲 No Pix, com acesso imediato</p>
             </div>
-            <CtaButton onClick={buy} className="mt-8 w-full">QUERO MEU BAÚ DE ATIVIDADES</CtaButton>
+            <CtaButton className="mt-8 w-full">QUERO MEU BAÚ DE ATIVIDADES</CtaButton>
             <p className="mt-4 text-center text-sm font-bold text-muted-foreground">🔒 Compra 100% segura · ⚡ Acesso na hora · 🛡️ 7 dias de garantia</p>
           </div>
         </div>
@@ -305,15 +304,12 @@ function Index() {
           <Squiggle className="absolute bottom-10 left-[10%] w-20 text-sun" />
           <h2 className="relative mx-auto max-w-3xl text-3xl font-extrabold sm:text-5xl">Transforme alguns minutos de atividade em momentos de aprendizado e diversão.</h2>
           <p className="relative mx-auto mt-5 max-w-xl text-lg font-semibold opacity-95">Tenha centenas de atividades prontas para usar quando precisar.</p>
-          <Button onClick={buy} className="relative mt-9 h-auto rounded-full bg-card px-9 py-5 font-heading text-lg font-extrabold text-foreground shadow-xl transition-transform hover:-translate-y-1 hover:bg-card sm:text-xl">Quero meu pacote por R$27 <ArrowRight className="size-6" /></Button>
+          <Button asChild className="relative mt-9 h-auto rounded-full bg-card px-9 py-5 font-heading text-lg font-extrabold text-foreground shadow-xl transition-transform hover:-translate-y-1 hover:bg-card sm:text-xl"><a href={CHECKOUT_URL}>Quero meu pacote por R$27 <ArrowRight className="size-6" /></a></Button>
         </div>
       </section>
     </main>
 
     <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">Material digital em PDF · Crianças de 3 a 12 anos · Pagamento via Pix</footer>
 
-    <Dialog.Root open={checkoutOpen} onOpenChange={setCheckoutOpen}>
-      <Dialog.Portal><Dialog.Overlay className="fixed inset-0 z-40 bg-foreground/40" /><Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[calc(100%_-_40px)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-[32px] bg-background p-8 shadow-xl"><Dialog.Title className="font-heading text-2xl font-extrabold">As compras ainda não estão abertas</Dialog.Title><Dialog.Description className="mt-4 leading-relaxed text-muted-foreground">O pagamento e o download deste pacote ainda não estão disponíveis nesta página. Nenhuma cobrança será feita.</Dialog.Description><p className="mt-5 font-bold">Pacote completo: R$27 no Pix</p><Dialog.Close asChild><Button className="mt-6 w-full rounded-full">Entendi</Button></Dialog.Close><Dialog.Close asChild><Button variant="ghost" size="icon" aria-label="Fechar" className="absolute right-3 top-3 rounded-full"><X /></Button></Dialog.Close></Dialog.Content></Dialog.Portal>
-    </Dialog.Root>
   </>;
 }
