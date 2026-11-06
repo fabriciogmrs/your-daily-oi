@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useState, type ReactNode } from 'react';
-import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp, X } from 'lucide-react';
-import * as Dialog from '@radix-ui/react-dialog';
+import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { audiences, bonuses, categories, faqs, levels, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
 import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
@@ -29,8 +28,10 @@ export const Route = createFileRoute('/')({
   component: Index,
 });
 
-function CtaButton({ children, onClick, className = '' }: { children: ReactNode; onClick: () => void; className?: string }) {
-  return <Button onClick={onClick} className={`cta-button h-auto rounded-full px-8 py-5 font-heading text-lg font-extrabold tracking-wide sm:text-xl ${className}`}>{children} <ArrowRight className="size-6" /></Button>;
+const CHECKOUT_URL = 'https://pay.cakto.com.br/r9kmwui_1288422';
+
+function CtaButton({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return <Button asChild className={`cta-button h-auto rounded-full px-8 py-5 font-heading text-lg font-extrabold tracking-wide sm:text-xl ${className}`}><a href={CHECKOUT_URL}>{children} <ArrowRight className="size-6" /></a></Button>;
 }
 
 function SectionHead({ kicker, title, tone, children }: { kicker: string; title: ReactNode; tone: keyof typeof toneStyles; children?: ReactNode }) {
