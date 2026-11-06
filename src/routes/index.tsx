@@ -63,7 +63,7 @@ function Index() {
 
   return <>
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur-md">
-      <div className="bg-tangerine px-4 py-2 text-center text-sm font-extrabold text-primary-foreground">⏳ Preço de lançamento até 31 de outubro — depois volta para R$47</div>
+      <div className="bg-tangerine px-4 py-2 text-center text-sm font-extrabold text-primary-foreground">⏳ Preço de lançamento até 15 de novembro — depois volta para R$47</div>
       <div className="page-width flex h-18 items-center justify-between gap-4">
         <a href="#" className="mr-2 flex items-center" aria-label="Brincatividades, início">
           <span className="relative font-heading text-[25px] font-extrabold leading-none tracking-tight sm:text-[28px]">
