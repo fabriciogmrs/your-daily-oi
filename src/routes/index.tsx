@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState, type ReactNode } from 'react';
-import { initMetaPixel, trackInitiateCheckout } from '@/lib/meta-pixel';
+import { initMetaPixel } from '@/lib/meta-pixel';
 import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { audiences, bonuses, categories, faqs, levels, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
@@ -32,7 +32,7 @@ export const Route = createFileRoute('/')({
 const CHECKOUT_URL = 'https://pay.cakto.com.br/r9kmwui_1288422';
 
 function CtaButton({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <Button asChild className={`cta-button h-auto rounded-full px-8 py-5 font-heading text-lg font-extrabold tracking-wide sm:text-xl ${className}`}><a href={CHECKOUT_URL} onClick={trackInitiateCheckout}>{children} <ArrowRight className="size-6" /></a></Button>;
+  return <Button asChild className={`cta-button h-auto rounded-full px-8 py-5 font-heading text-lg font-extrabold tracking-wide sm:text-xl ${className}`}><a href={CHECKOUT_URL}>{children} <ArrowRight className="size-6" /></a></Button>;
 }
 
 function SectionHead({ kicker, title, tone, children }: { kicker: string; title: ReactNode; tone: keyof typeof toneStyles; children?: ReactNode }) {
@@ -306,7 +306,7 @@ function Index() {
           <Squiggle className="absolute bottom-10 left-[10%] w-20 text-sun" />
           <h2 className="relative mx-auto max-w-3xl text-3xl font-extrabold sm:text-5xl">Transforme alguns minutos de atividade em momentos de aprendizado e diversão.</h2>
           <p className="relative mx-auto mt-5 max-w-xl text-lg font-semibold opacity-95">Tenha centenas de atividades prontas para usar quando precisar.</p>
-          <Button asChild className="relative mt-9 h-auto rounded-full bg-card px-9 py-5 font-heading text-lg font-extrabold text-foreground shadow-xl transition-transform hover:-translate-y-1 hover:bg-card sm:text-xl"><a href={CHECKOUT_URL} onClick={trackInitiateCheckout}>Quero meu pacote por R$27 <ArrowRight className="size-6" /></a></Button>
+          <Button asChild className="relative mt-9 h-auto rounded-full bg-card px-9 py-5 font-heading text-lg font-extrabold text-foreground shadow-xl transition-transform hover:-translate-y-1 hover:bg-card sm:text-xl"><a href={CHECKOUT_URL}>Quero meu pacote por R$27 <ArrowRight className="size-6" /></a></Button>
         </div>
       </section>
     </main>

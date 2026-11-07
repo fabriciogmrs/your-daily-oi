@@ -16,7 +16,6 @@ const CONSENT_REGIONS = new Set([
   'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH',
 ]);
 
-let allowed = false;
 let started = false;
 
 function gpcOptOut() {
@@ -66,13 +65,6 @@ export async function initMetaPixel() {
     s.src = 'https://connect.facebook.net/en_US/fbevents.js';
     document.head.appendChild(s);
   }
-  allowed = true;
   call('init', META_PIXEL_ID, {}, { agent: 'lovable' });
   call('track', 'PageView');
-}
-
-export function trackInitiateCheckout() {
-  if (!allowed || gpcOptOut()) return;
-  const id = typeof crypto !== 'undefined' && 'randomUUID' in crypto ? crypto.randomUUID() : String(Date.now());
-  call('track', 'InitiateCheckout', { value: 27, currency: 'BRL' }, { eventID: id });
 }

@@ -1,4 +1,5 @@
 # Roadmap
+- [x] Remover InitiateCheckout dos botões da página; manter PageView e deixar eventos de checkout na Cakto.
 - [x] Prevent mixed React dependency generations and verify the reported blank-screen crash.
 - [x] Build the Brazilian Portuguese product sales page with 442 total activities, 13 categories, benefits, offer and FAQ.
 - [x] Verify the page and its interactions on large and small screens.
