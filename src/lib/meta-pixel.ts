@@ -17,6 +17,8 @@ const CONSENT_REGIONS = new Set([
 ]);
 
 let started = false;
+let allowed = false;
+let contentReported = false;
 
 function gpcOptOut() {
   return (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
@@ -65,6 +67,18 @@ export async function initMetaPixel() {
     s.src = 'https://connect.facebook.net/en_US/fbevents.js';
     document.head.appendChild(s);
   }
+  allowed = true;
   call('init', META_PIXEL_ID, {}, { agent: 'lovable' });
   call('track', 'PageView');
+}
+
+// One bottom-of-page view per document visit, never a checkout or purchase.
+export function trackFullPageView() {
+  if (contentReported) return;
+  contentReported = true;
+  if (!allowed || gpcOptOut()) return;
+  call('track', 'ViewContent', {
+    content_name: 'Brincatividades',
+    content_category: 'Pagina de produto completa',
+  });
 }

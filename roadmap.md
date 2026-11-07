@@ -1,4 +1,5 @@
 # Roadmap
+- [x] Adicionar ViewContent uma vez por visita ao chegar ao fim da página, respeitando o bloqueio regional do pixel.
 - [x] Remover InitiateCheckout dos botões da página; manter PageView e deixar eventos de checkout na Cakto.
 - [x] Prevent mixed React dependency generations and verify the reported blank-screen crash.
 - [x] Build the Brazilian Portuguese product sales page with 442 total activities, 13 categories, benefits, offer and FAQ.
