@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState, type ReactNode } from 'react';
-import { initMetaPixel } from '@/lib/meta-pixel';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { initMetaPixel, trackFullPageView } from '@/lib/meta-pixel';
 import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { audiences, bonuses, categories, faqs, levels, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
@@ -58,7 +58,21 @@ function GalleryRow({ kinds, reverse = false }: { kinds: SheetKind[]; reverse?: 
 
 function Index() {
   useReveal();
-  useEffect(() => { void initMetaPixel(); }, []);
+  const pageEnd = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let disposed = false;
+    let observer: IntersectionObserver | undefined;
+    void initMetaPixel().then(() => {
+      if (disposed || !pageEnd.current) return;
+      observer = new IntersectionObserver(entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        trackFullPageView();
+        observer?.disconnect();
+      });
+      observer.observe(pageEnd.current);
+    });
+    return () => { disposed = true; observer?.disconnect(); };
+  }, []);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return <>
@@ -312,6 +326,7 @@ function Index() {
     </main>
 
     <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">Material digital em PDF · Crianças de 3 a 12 anos · Pagamento via Pix · <a className="underline hover:text-primary" href="/privacidade">Privacidade</a></footer>
+    <div ref={pageEnd} aria-hidden="true" className="h-px" />
 
   </>;
 }
