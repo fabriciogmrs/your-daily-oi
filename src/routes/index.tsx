@@ -125,7 +125,7 @@ function Index() {
           <div className="relative mx-auto h-[400px] w-full max-w-[460px] sm:h-[480px]">
             <div className="blob absolute inset-4 bg-sun-soft" />
             <div className="blob absolute bottom-0 right-0 size-40 bg-bubble-soft" />
-            <img src={heroMockup} alt="Mockup do Brincatividades: apostila e folhas de atividades com lápis de cor" width={1024} height={1024} className="absolute inset-0 z-[5] m-auto h-full w-full object-contain drop-shadow-xl" />
+            <img src={heroMockup} alt="Mockup do Brincatividades: apostila e folhas de atividades com lápis de cor" width={1024} height={1024} fetchPriority="high" decoding="async" className="absolute inset-0 z-[5] m-auto h-full w-full object-contain drop-shadow-xl" />
             <div className="float absolute -left-1 bottom-10 z-10 flex size-24 rotate-[-8deg] flex-col items-center justify-center rounded-full border-4 border-card bg-tangerine text-primary-foreground shadow-lg">
               <span className="font-heading text-3xl font-extrabold leading-none">PDF</span><span className="text-[10px] font-black uppercase">pra imprimir</span>
             </div>
