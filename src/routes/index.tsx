@@ -13,6 +13,7 @@ import bonusCaca from '@/assets/bonus-cacapalavras.webp';
 import depoimento1 from '@/assets/depoimento-1.jpg.asset.json';
 import depoimento2 from '@/assets/depoimento-2.jpg.asset.json';
 import depoimento3 from '@/assets/depoimento-3.jpg.asset.json';
+import criancasAtividade from '@/assets/criancas-atividade.webp.asset.json';
 
 const bonusImages = [bonusMat, bonusRec, bonusCaca];
 const testimonialPhotos = [depoimento1.url, depoimento2.url, depoimento3.url];
@@ -211,7 +212,14 @@ function Index() {
       <section className="py-20 sm:py-28">
         <div className="page-width">
           <SectionHead kicker="Para quem é" title={<>Feito para quem <span className="text-grape">ensina com carinho.</span></>} tone="grape" />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="reveal mx-auto mt-12 w-full max-w-[340px] sm:max-w-[420px]">
+            <figure className="relative -rotate-1 rounded-[32px] bg-card p-3 shadow-xl ring-1 ring-foreground/5 transition-transform duration-500 hover:rotate-0">
+              <img src={criancasAtividade.url} alt="Duas crianças fazendo as atividades impressas da Brincatividades na mesa, com canetinhas" loading="lazy" decoding="async" width={760} height={1351} className="w-full rounded-[24px] object-cover" />
+              <Star className="float absolute -left-6 -top-6 w-11 text-sun" />
+              <Dot className="absolute -bottom-4 right-8 size-7 bg-bubble" />
+            </figure>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {audiences.map(({ emoji, title, text, tone }, i) => <article key={title} className={`reveal soft-card relative overflow-hidden p-8 ${toneStyles[tone].soft}`} style={{ transitionDelay: `${i * 90}ms` }}>
               <div className={`blob absolute -right-8 -top-8 size-32 ${toneStyles[tone].solid} opacity-25`} />
               <span className="relative flex size-20 items-center justify-center rounded-3xl bg-card text-5xl shadow-sm">{emoji}</span>
