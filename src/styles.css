@@ -97,5 +97,8 @@
  html { scroll-behavior: auto; }
  .reveal { opacity: 1; transform: none; transition: none; }
  .float, .float-slow, .wiggle:hover, .cta-button, .marquee-track { animation: none; }
+ .marquee { overflow: visible; -webkit-mask-image: none; mask-image: none; }
+ .marquee .marquee-track { flex-wrap: wrap; justify-content: center; width: auto; }
+ .marquee .marquee-track > * { margin: 0 14px 28px; }
  .soft-card, .sheet { transition: none; }
 }
