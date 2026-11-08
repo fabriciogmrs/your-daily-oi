@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { initMetaPixel, trackFullPageView } from '@/lib/meta-pixel';
 import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { audiences, bonuses, categories, faqs, levels, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
+import { audiences, bonuses, categories, faqs, levels, offerItems, importance, testimonials, toneStyles } from '@/lib/product-content';
 import exemplo1 from '@/assets/exemplo-1.webp.asset.json';
 import exemplo2 from '@/assets/exemplo-2.webp.asset.json';
 import exemplo3 from '@/assets/exemplo-3.webp.asset.json';
@@ -204,11 +204,12 @@ function Index() {
       <section className="relative bg-leaf-soft py-20 sm:py-28">
         <Squiggle className="absolute left-[6%] top-14 w-20 text-grape" />
         <div className="page-width">
-          <SectionHead kicker="Desenvolvimento" title={<>Muito mais do que <span className="text-leaf">uma brincadeira.</span></>} tone="leaf">Cada página estimula uma habilidade importante para crescer aprendendo.</SectionHead>
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-            {skills.map(({ emoji, name, tone }, i) => <div key={name} className="reveal soft-card flex flex-col items-center p-6 text-center" style={{ transitionDelay: `${(i % 4) * 70}ms` }}>
+          <SectionHead kicker="Desenvolvimento" title={<>Por que essas atividades <span className="text-leaf">são importantes?</span></>} tone="leaf">Cada tipo de atividade desenvolve algo que a criança vai levar para a vida.</SectionHead>
+          <div className="mt-14 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            {importance.map(({ emoji, name, text, tone }, i) => <div key={name} className="reveal soft-card flex flex-col items-center p-6 text-center" style={{ transitionDelay: `${(i % 3) * 70}ms` }}>
               <span className={`blob wiggle flex size-20 items-center justify-center text-4xl ${toneStyles[tone].soft}`}>{emoji}</span>
               <h3 className="mt-4 text-lg font-extrabold leading-tight">{name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
             </div>)}
           </div>
         </div>
