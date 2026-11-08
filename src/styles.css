@@ -80,7 +80,7 @@
 .marquee-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
 .marquee-track > * { margin-right: 28px; }
 .marquee-track.reverse { animation-direction: reverse; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+@media (hover: hover) and (pointer: fine) { .marquee:hover .marquee-track { animation-play-state: paused; } }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .sheet { background: var(--paper); border-radius: 18px; box-shadow: var(--lift-shadow); transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
 .sheet-tilt:hover { transform: rotate(0deg) translateY(-8px) scale(1.03) !important; z-index: 5; }
@@ -96,10 +96,6 @@
 @media (prefers-reduced-motion: reduce) {
  html { scroll-behavior: auto; }
  .reveal { opacity: 1; transform: none; transition: none; }
- .float, .float-slow, .wiggle:hover, .cta-button, .marquee-track { animation: none; }
- .marquee { overflow: visible; -webkit-mask-image: none; mask-image: none; }
- .marquee .marquee-track { flex-wrap: wrap; justify-content: center; width: auto; }
- .marquee .marquee-track > * { margin: 0 14px 28px; }
- .marquee .marquee-dup { display: none; }
+ .float, .float-slow, .wiggle:hover, .cta-button { animation: none; }
  .soft-card, .sheet { transition: none; }
 }
