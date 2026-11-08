@@ -4,7 +4,11 @@ import { initMetaPixel, trackFullPageView } from '@/lib/meta-pixel';
 import { ArrowRight, Check, ChevronDown, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { audiences, bonuses, categories, faqs, levels, offerItems, skills, testimonials, toneStyles } from '@/lib/product-content';
-import { ActivitySheet, type SheetKind } from '@/components/kids/ActivitySheet';
+import exemplo1 from '@/assets/exemplo-1.webp.asset.json';
+import exemplo2 from '@/assets/exemplo-2.webp.asset.json';
+import exemplo3 from '@/assets/exemplo-3.webp.asset.json';
+import exemplo4 from '@/assets/exemplo-4.webp.asset.json';
+import exemplo5 from '@/assets/exemplo-5.webp.asset.json';
 import { Cloud, Dot, Pencil, Squiggle, Star, useReveal } from '@/components/kids/Decor';
 import heroMockup from '@/assets/hero-mockup.webp';
 import bonusMat from '@/assets/bonus-matematica.webp';
@@ -44,15 +48,16 @@ function SectionHead({ kicker, title, tone, children }: { kicker: string; title:
   </div>;
 }
 
-const galleryRowA: SheetKind[] = ['maze', 'wordsearch', 'color', 'math', 'dots', 'draw'];
-const galleryRowB: SheetKind[] = ['letters', 'shadow', 'numbers', 'match', 'trace', 'shapes'];
+const galleryRowA = [exemplo1, exemplo3, exemplo5];
+const galleryRowB = [exemplo2, exemplo4];
 
-function GalleryRow({ kinds, reverse = false }: { kinds: SheetKind[]; reverse?: boolean }) {
-  const doubled = [...kinds, ...kinds];
+function GalleryRow({ images, reverse = false }: { images: { url: string }[]; reverse?: boolean }) {
+  const doubled = [...images, ...images, ...images];
   return <div className="marquee py-4">
     <div className={`marquee-track${reverse ? ' reverse' : ''}`}>
-      {doubled.map((kind, i) => <ActivitySheet key={`${kind}-${i}`} kind={kind}
-        className="sheet-tilt aspect-[3/4] w-44 shrink-0 sm:w-56" style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }} />)}
+      {doubled.map((img, i) => <img key={i} src={img.url} alt="Página real de atividade do Brincatividades" loading="lazy"
+        className="sheet-tilt aspect-[3/4] w-44 shrink-0 rounded-2xl border border-border bg-card object-cover shadow-md sm:w-56"
+        style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }} />)}
     </div>
   </div>;
 }
@@ -188,10 +193,10 @@ function Index() {
           <SectionHead kicker="Espie por dentro" title={<>Exemplos das <span className="text-bubble">atividades</span></>} tone="bubble">Páginas coloridas, claras e prontas para a criança pegar o lápis e começar.</SectionHead>
         </div>
         <div className="mt-14 space-y-6">
-          <GalleryRow kinds={galleryRowA} />
-          <GalleryRow kinds={galleryRowB} reverse />
+          <GalleryRow images={galleryRowA} />
+          <GalleryRow images={galleryRowB} reverse />
         </div>
-        <p className="page-width mt-8 text-center text-xs text-muted-foreground">Ilustrações representativas do estilo das atividades.</p>
+        <p className="page-width mt-8 text-center text-xs text-muted-foreground">Páginas reais do material que você recebe.</p>
       </section>
 
       {/* DESENVOLVIMENTO */}
