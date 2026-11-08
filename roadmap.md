@@ -10,3 +10,4 @@
 - [x] Cabeçalho: preço "R$27" e símbolo "A" removidos; nome virou logotipo próprio (brinc + atividades em tangerina, rabisco amarelo e ponto rosa).
 - [x] Aprimoramento das folhas de exemplo encerrado a pedido do dono (parar de polir a seção).
 - [x] Adicionar bloco pequeno com os 3 níveis de dificuldade (selos Fácil/Médio/Difícil com idade, frase e exemplo).
+- [x] Foto real das duas crianças fazendo as atividades na seção "Para quem é", acima dos 3 públicos.
