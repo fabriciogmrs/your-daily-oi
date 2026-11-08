@@ -52,7 +52,7 @@ const galleryRowA = [exemplo1, exemplo3, exemplo5];
 const galleryRowB = [exemplo2, exemplo4];
 
 function GalleryRow({ images, reverse = false }: { images: { url: string }[]; reverse?: boolean }) {
-  const doubled = [...images, ...images, ...images];
+  const doubled = [...images, ...images];
   return <div className="marquee py-4">
     <div className={`marquee-track${reverse ? ' reverse' : ''}`}>
       {doubled.map((img, i) => <img key={i} src={img.url} alt="Página real de atividade do Brincatividades" loading="lazy"
