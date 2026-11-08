@@ -212,7 +212,7 @@ function Index() {
       <section className="py-20 sm:py-28">
         <div className="page-width">
           <SectionHead kicker="Para quem é" title={<>Feito para quem <span className="text-grape">ensina com carinho.</span></>} tone="grape" />
-          <div className="reveal mx-auto mt-12 w-full max-w-[360px]">
+          <div className="reveal mx-auto mt-12 w-full max-w-[340px] sm:max-w-[420px]">
             <figure className="relative -rotate-1 rounded-[32px] bg-card p-3 shadow-xl ring-1 ring-foreground/5 transition-transform duration-500 hover:rotate-0">
               <img src={criancasAtividade.url} alt="Duas crianças fazendo as atividades impressas da Brincatividades na mesa, com canetinhas" loading="lazy" decoding="async" width={760} height={1351} className="w-full rounded-[24px] object-cover" />
               <Star className="float absolute -left-6 -top-6 w-11 text-sun" />
