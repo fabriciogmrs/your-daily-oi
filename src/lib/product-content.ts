@@ -27,15 +27,13 @@ export const categories: { name: string; description: string; icon: typeof Brain
   { name: 'Raciocínio avançado', description: 'Sudoku de figuras e desafios de lógica.', icon: Puzzle, tone: 'bubble' },
 ];
 
-export const skills: { emoji: string; name: string; icon: typeof Brain; tone: Tone }[] = [
-  { emoji: '🧠', name: 'Raciocínio', icon: Brain, tone: 'grape' },
-  { emoji: '🎯', name: 'Atenção', icon: Target, tone: 'tangerine' },
-  { emoji: '✋', name: 'Coordenação motora', icon: Hand, tone: 'sun' },
-  { emoji: '🔤', name: 'Alfabetização', icon: ALargeSmall, tone: 'bubble' },
-  { emoji: '🔢', name: 'Matemática', icon: Sigma, tone: 'sky' },
-  { emoji: '💡', name: 'Criatividade', icon: Lightbulb, tone: 'sun' },
-  { emoji: '🧩', name: 'Resolução de problemas', icon: Puzzle, tone: 'leaf' },
-  { emoji: '👀', name: 'Percepção visual', icon: Eye, tone: 'grape' },
+export const importance: { emoji: string; name: string; text: string; tone: Tone }[] = [
+  { emoji: '🎯', name: 'Atenção e foco', text: 'Labirintos, sombras e diferenças treinam a criança a se concentrar por mais tempo — algo que faz falta na escola e em casa.', tone: 'tangerine' },
+  { emoji: '✋', name: 'Coordenação motora', text: 'Traçar, pintar e recortar fortalece a mão e os dedos, preparando a criança para escrever com mais firmeza e capricho.', tone: 'sun' },
+  { emoji: '🔤', name: 'Alfabetização', text: 'Reconhecer letras, sílabas e palavras brincando torna a leitura e a escrita mais leves, sem pressão.', tone: 'bubble' },
+  { emoji: '🔢', name: 'Matemática', text: 'Contar, comparar e resolver continhas com desenhos dá sentido aos números e cria base para o raciocínio lógico.', tone: 'sky' },
+  { emoji: '🧠', name: 'Memória e raciocínio', text: 'Jogos de memória e desafios lógicos ensinam a criança a pensar, planejar e encontrar soluções sozinha.', tone: 'grape' },
+  { emoji: '📵', name: 'Menos tela, mais presença', text: 'Atividades no papel oferecem uma alternativa ao celular e criam momentos de qualidade entre adultos e crianças.', tone: 'leaf' },
 ];
 
 export const audiences: { emoji: string; title: string; text: string; tone: Tone }[] = [
