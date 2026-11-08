@@ -56,7 +56,8 @@ function GalleryRow({ images, reverse = false }: { images: { url: string }[]; re
   return <div className="marquee py-4">
     <div className={`marquee-track${reverse ? ' reverse' : ''}`}>
       {doubled.map((img, i) => <img key={i} src={img.url} alt="Página real de atividade do Brincatividades" loading="lazy"
-        className="sheet-tilt aspect-[3/4] w-44 shrink-0 rounded-2xl border border-border bg-card object-cover shadow-md sm:w-56"
+        aria-hidden={i >= images.length}
+        className={`sheet-tilt aspect-[3/4] w-44 shrink-0 rounded-2xl border border-border bg-card object-cover shadow-md sm:w-56${i >= images.length ? ' marquee-dup' : ''}`}
         style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }} />)}
     </div>
   </div>;
