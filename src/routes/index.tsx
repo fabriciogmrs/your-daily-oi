@@ -101,36 +101,37 @@ function Index() {
         <Star className="float absolute left-[46%] top-8 w-9 text-sun" />
         <Squiggle className="absolute bottom-10 left-6 w-24 text-leaf" />
         <Dot className="float absolute right-8 top-24 size-5 bg-bubble" />
-        <div className="page-width grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
-          <div className="reveal in relative z-10 text-center lg:text-left">
+        <div className="page-width">
+          <div className="reveal in relative z-10 mx-auto max-w-3xl text-center">
             <span className="kicker bg-grape-soft text-grape"><Sparkles size={14} /> Para famílias e profissionais</span>
             <h1 className="mt-6 text-[38px] font-extrabold leading-[1.1] sm:text-[52px] lg:text-[58px]">
               <span className="text-tangerine">Transforme distração em foco</span> com atividades que a criança <span className="decoration-sun decoration-wavy decoration-[6px] underline underline-offset-[10px]">realmente quer fazer</span>.
             </h1>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground lg:mx-0">Tenha atividades prontas para imprimir e usar em casa ou na escola, organizadas para desenvolver diferentes habilidades das crianças.</p>
-            <div className="mx-auto mt-7 grid max-w-md grid-cols-3 gap-3 lg:mx-0">
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">Tenha atividades prontas para imprimir e usar em casa ou na escola, organizadas para desenvolver diferentes habilidades das crianças.</p>
+            <div className="mx-auto mt-7 grid max-w-md grid-cols-3 gap-3">
               {[['442', 'páginas', 'tangerine'], ['13', 'categorias', 'sky'], ['3', 'níveis', 'leaf']].map(([n, l, t]) =>
                 <div key={l} className={`wiggle rounded-2xl ${toneStyles[t as 'sky'].soft} px-3 py-3 text-center`}>
                   <div className={`font-heading text-3xl font-extrabold leading-none sm:text-4xl ${toneStyles[t as 'sky'].text}`}>{n}</div>
                   <div className="mt-1 text-xs font-black uppercase tracking-wider">{l}</div>
                 </div>)}
             </div>
+
+            {/* Mockup */}
+            <div className="relative mx-auto mt-10 h-[400px] w-full max-w-[460px] sm:h-[480px]">
+              <div className="blob absolute inset-4 bg-sun-soft" />
+              <div className="blob absolute bottom-0 right-0 size-40 bg-bubble-soft" />
+              <img src={heroMockup} alt="Mockup do Brincatividades: apostila e folhas de atividades com lápis de cor" width={1024} height={1024} fetchPriority="high" decoding="async" className="absolute inset-0 z-[5] m-auto h-full w-full object-contain drop-shadow-xl" />
+              <div className="float absolute -left-1 bottom-10 z-10 flex size-24 rotate-[-8deg] flex-col items-center justify-center rounded-full border-4 border-card bg-tangerine text-primary-foreground shadow-lg">
+                <span className="font-heading text-3xl font-extrabold leading-none">PDF</span><span className="text-[10px] font-black uppercase">pra imprimir</span>
+              </div>
+              <Pencil className="float-slow absolute -right-2 bottom-16 z-10 w-16" />
+              <Star className="float absolute right-10 top-0 z-10 w-10 text-bubble" />
+            </div>
+
             <CtaButton className="mt-8 w-full sm:w-auto">Quero meu pacote por R$27</CtaButton>
-            <ul className="mx-auto mt-6 grid max-w-md grid-cols-2 gap-x-4 gap-y-2 text-sm font-bold lg:mx-0">
+            <ul className="mx-auto mt-6 grid max-w-md grid-cols-2 gap-x-4 gap-y-2 text-sm font-bold">
               {['Download imediato', 'Arquivo PDF', 'Acesso vitalício', 'Pronto para imprimir'].map(t => <li key={t} className="flex items-center gap-2"><span className="flex size-5 items-center justify-center rounded-full bg-leaf text-primary-foreground"><Check size={13} strokeWidth={4} /></span>{t}</li>)}
             </ul>
-          </div>
-
-          {/* Mockup */}
-          <div className="relative mx-auto h-[400px] w-full max-w-[460px] sm:h-[480px]">
-            <div className="blob absolute inset-4 bg-sun-soft" />
-            <div className="blob absolute bottom-0 right-0 size-40 bg-bubble-soft" />
-            <img src={heroMockup} alt="Mockup do Brincatividades: apostila e folhas de atividades com lápis de cor" width={1024} height={1024} fetchPriority="high" decoding="async" className="absolute inset-0 z-[5] m-auto h-full w-full object-contain drop-shadow-xl" />
-            <div className="float absolute -left-1 bottom-10 z-10 flex size-24 rotate-[-8deg] flex-col items-center justify-center rounded-full border-4 border-card bg-tangerine text-primary-foreground shadow-lg">
-              <span className="font-heading text-3xl font-extrabold leading-none">PDF</span><span className="text-[10px] font-black uppercase">pra imprimir</span>
-            </div>
-            <Pencil className="float-slow absolute -right-2 bottom-16 z-10 w-16" />
-            <Star className="float absolute right-10 top-0 z-10 w-10 text-bubble" />
           </div>
         </div>
       </section>
